@@ -22,36 +22,65 @@ const Connections = () => {
     fetchConnections();
   }, []);
 
-  if (!connections) return;
+  if (!connections)
+    return (
+      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+        {" "}
+        Connection not proccessed
+      </div>
+    );
 
-  if (connections.length === 0) return <h1> No Connections Found</h1>;
+  if (connections.length === 0)
+    return (
+      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+        {" "}
+        No Connection Found
+      </div>
+    );
 
   return (
-    <div className="text-center my-10">
-      <h1 className="text-bold text-white text-3xl">Connections</h1>
+    <div className="text-center my-10 min-h-screen">
+      <div className="text-bold text-[#BE7E40] sm:text-4xl text-xl">
+        Connections
+      </div>
 
       {connections.map((connection) => {
-        const { _id, firstName, lastName, photoUrl, age, gender, about } =
-          connection;
+        const {
+          _id,
+          firstName,
+          lastName,
+          photoUrl,
+          age,
+          gender,
+          skills,
+          about,
+        } = connection;
 
         return (
           <div
             key={_id}
-            className=" flex m-4 p-4 rounded-lg bg-base-300 w-1/2 mx-auto"
+            className="m-4 p-4 rounded-lg bg-base-300 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto"
           >
-            <div>
-              <img
-                alt="photo"
-                className="w-20 h-20 rounded-full object-cover"
-                src={photoUrl}
-              />
-            </div>
-            <div className="text-left mx-4 ">
-              <h2 className="font-bold text-xl">
-                {firstName + " " + lastName}
-              </h2>
-              {age && gender && <p>{age + ", " + gender}</p>}
-              <p>{about}</p>
+            <div className="grid grid-cols-12">
+              <div className="col-span-4">
+                <img
+                  alt="photo"
+                  className="w-20 h-20 rounded-full object-cover"
+                  src={photoUrl}
+                />
+              </div>
+              <div className="sm:text-left text-right mx-4 col-span-8">
+                <p className="font-bold sm:text-xl text-sm">
+                  {firstName + " " + lastName}
+                </p>
+                <p className="font-semibold sm:text-lg text-xs">{skills}</p>
+                {age && gender && (
+                  <p className="font-semibold sm:text-lg text-xs">
+                    {age + ", " + gender}
+                  </p>
+                )}
+                <p>{about}</p>
+              </div>
             </div>
           </div>
         );

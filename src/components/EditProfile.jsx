@@ -11,13 +11,13 @@ const EditProfile = ({ user }) => {
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl || "");
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
+  const [skills, setSkills] = useState(user.skills || "");
   const [about, setAbout] = useState(user.about || "");
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
 
   const saveProfile = async () => {
-    //Clear Errors
     setError("");
     try {
       const res = await axios.patch(
@@ -28,6 +28,7 @@ const EditProfile = ({ user }) => {
           photoUrl,
           age,
           gender,
+          skills,
           about,
         },
         { withCredentials: true }
@@ -38,7 +39,6 @@ const EditProfile = ({ user }) => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      //   setError(err.response.data);
       setError(err.response?.data || "An unexpected error occurred");
     }
   };
@@ -59,6 +59,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={firstName}
                     className="input input-bordered w-full max-w-xs"
+                    maxLength={30}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
                 </label>
@@ -70,18 +71,20 @@ const EditProfile = ({ user }) => {
                     <input
                       type="text"
                       value={lastName}
+                      maxLength={30}
                       className="input input-bordered w-full max-w-xs"
                       onChange={(e) => setLastName(e.target.value)}
                     />
                   </label>
                   <div className="label">
-                    <span className="label-text">Photo URL :</span>
+                    <span className="label-text">Photo URL:</span>
                   </div>
                   <input
                     type="text"
                     value={photoUrl}
                     className="input input-bordered w-full max-w-xs"
                     onChange={(e) => setPhotoUrl(e.target.value)}
+                    maxLength={500}
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
@@ -106,14 +109,29 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => setGender(e.target.value)}
                   />
                 </label>
-                <label className="form-control w-full max-w-xs my-2">
+                <label className="form-control flex flex-wrap text-wrap max-w-xs my-2">
+                  <div className="label">
+                    <span className="label-text">Skills:</span>
+                  </div>
+                  <textarea
+                    type="text"
+                    value={skills}
+                    minLength={0}
+                    maxLength={100}
+                    className="input input-bordered text-wrap max-w-xs"
+                    onChange={(e) => setSkills(e.target.value)}
+                  />
+                </label>
+                <label className="form-control flex flex-wrap text-wrap max-w-xs my-2">
                   <div className="label">
                     <span className="label-text">About:</span>
                   </div>
-                  <input
+                  <textarea
                     type="text"
                     value={about}
-                    className="input input-bordered w-full max-w-xs"
+                    minLength={0}
+                    maxLength={100}
+                    className="input input-bordered text-wrap max-w-xs"
                     onChange={(e) => setAbout(e.target.value)}
                   />
                 </label>
@@ -128,7 +146,7 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
         <UserCard
-          user={{ firstName, lastName, photoUrl, age, gender, about }}
+          user={{ firstName, lastName, photoUrl, age, gender, skills, about }}
         />
       </div>
       {showToast && (

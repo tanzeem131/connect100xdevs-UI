@@ -17,7 +17,7 @@ const Feed = () => {
       });
       dispatch(addFeed(res?.data?.data));
     } catch (err) {
-      //TODO: handle error
+      console.error(err);
     }
   };
 
@@ -27,11 +27,17 @@ const Feed = () => {
   if (!feed) return;
 
   if (feed.length <= 0)
-    return <h1 className="flex justify-center my-10">No new users founds!</h1>;
+    return (
+      <div className="flex justify-center h-screen items-center  bg-[url(image/background-img.webp)] bg-cover bg-no-repeat animate-verticalScroll">
+        <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
+          No new user founds!
+        </div>
+      </div>
+    );
 
   return (
     feed && (
-      <div className="flex justify-center my-10">
+      <div className="flex justify-center sm:py-20 py-4 bg-[url(image/background-img.webp)] bg-cover bg-no-repeat animate-verticalScroll">
         <UserCard user={feed[0]} />
       </div>
     )

@@ -47,81 +47,97 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
-      <div className="card bg-base-300 w-96 shadow-xl">
-        <div className="card-body">
-          <h2 className="card-title justify-center">
-            {isLoginForm ? "Login" : "Sign Up"}
-          </h2>
-          <div>
-            {!isLoginForm && (
-              <>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">First Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={firstName}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setFirstName(e.target.value)}
-                  />
-                </label>
-                <label className="form-control w-full max-w-xs my-2">
-                  <div className="label">
-                    <span className="label-text">Last Name</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={lastName}
-                    className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setLastName(e.target.value)}
-                  />
-                </label>
-              </>
-            )}
-            <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Email ID:</span>
-              </div>
-              <input
-                type="text"
-                value={emailId}
-                className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setEmailId(e.target.value)}
-              />
-            </label>
-            <label className="form-control w-full max-w-xs my-2">
-              <div className="label">
-                <span className="label-text">Password</span>
-              </div>
-              <input
-                type="password"
-                value={password}
-                className="input input-bordered w-full max-w-xs"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-          <p className="text-red-500">{error}</p>
-          <div className="card-actions justify-center m-2">
-            <button
-              className="btn btn-primary"
-              onClick={isLoginForm ? handleLogin : handleSignUp}
-            >
+    <div className="sm:grid flex grid-cols-12 flex-wrap justify-center bg-black my-0">
+      <div className="col-span-3 bg-black">
+        <div className="card bg-black w-full rounded-none">
+          <div className="card-body">
+            <h2 className="card-title justify-center">
               {isLoginForm ? "Login" : "Sign Up"}
-            </button>
-          </div>
+            </h2>
+            <div>
+              {!isLoginForm && (
+                <>
+                  <label className="form-control w-full max-w-xs my-2">
+                    <div className="label">
+                      <span className="label-text">First Name:</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={firstName}
+                      maxLength={30}
+                      minLength={2}
+                      required
+                      className="input input-bordered w-full max-w-xs"
+                      onChange={(e) => setFirstName(e.target.value)}
+                    />
+                  </label>
+                  <label className="form-control w-full max-w-xs my-2">
+                    <div className="label">
+                      <span className="label-text">Last Name:</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={lastName}
+                      maxLength={30}
+                      minLength={2}
+                      className="input input-bordered w-full max-w-xs"
+                      onChange={(e) => setLastName(e.target.value)}
+                    />
+                  </label>
+                </>
+              )}
+              <label className="form-control w-full max-w-xs my-2">
+                <div className="label">
+                  <span className="label-text">Email ID:</span>
+                </div>
+                <input
+                  type="text"
+                  value={emailId}
+                  maxLength={40}
+                  required
+                  className="input input-bordered w-full max-w-xs"
+                  onChange={(e) => setEmailId(e.target.value)}
+                />
+              </label>
+              <label className="form-control w-full max-w-xs my-2">
+                <div className="label">
+                  <span className="label-text">Password</span>
+                </div>
+                <input
+                  type="password"
+                  value={password}
+                  required
+                  className="input input-bordered w-full max-w-xs"
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </label>
+            </div>
+            <p className="text-red-500">{error}</p>
+            <div className="card-actions justify-center m-2">
+              <button
+                className="btn btn-primary"
+                onClick={isLoginForm ? handleLogin : handleSignUp}
+              >
+                {isLoginForm ? "Login" : "Sign Up"}
+              </button>
+            </div>
 
-          <p
-            className="m-auto cursor-pointer py-2"
-            onClick={() => setIsLoginForm((value) => !value)}
-          >
-            {isLoginForm
-              ? "New User? Signup Here"
-              : "Existing User? Login Here"}
-          </p>
+            <p
+              className="m-auto cursor-pointer py-2"
+              onClick={() => setIsLoginForm((value) => !value)}
+            >
+              {isLoginForm
+                ? "New User? Signup Here"
+                : "Existing User? Login Here"}
+            </p>
+          </div>
         </div>
+      </div>
+      <div className="col-span-9 flex justify-center">
+        <p className="great-vibes-regular font-bold lg:text-6xl md:text-5xl sm:text-3xl absolute sm:pt-10 pt-4 animate-blur-reduce">
+          Step into the world of devs.
+        </p>
+        <img src="image/login.avif" className="h-full" />
       </div>
     </div>
   );

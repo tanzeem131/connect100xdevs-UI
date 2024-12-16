@@ -15,21 +15,23 @@ const NavBar = () => {
       dispatch(removeUser());
       return navigate("/login");
     } catch (err) {
-      // Error logic maybe redirect to error page
+      console.error(err);
     }
   };
 
   return (
-    <div className="navbar bg-base-300">
+    <div className="navbar bg-black border-b-2 border-base-100 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost text-xl">
-          👩‍💻 Tinder4Devs
+        <Link to="/" className="btn btn-ghost sm:text-xl text-sm">
+          connect100xdevs
         </Link>
       </div>
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control">Welcome, {user.firstName}</div>
-          <div className="dropdown dropdown-end mx-5 flex">
+          <div className="form-control sm:text-xl text-xs">
+            Welcome, {user.firstName}
+          </div>
+          <div className="dropdown dropdown-end sm:mx-5 mx-2 flex">
             <div
               tabIndex={0}
               role="button"
@@ -46,15 +48,16 @@ const NavBar = () => {
               <li>
                 <Link to="/profile" className="justify-between">
                   Profile
-                  <span className="badge">New</span>
                 </Link>
               </li>
               <li>
                 <Link to="/connections">Connections</Link>
               </li>
-
               <li>
                 <Link to="/requests">Requests</Link>
+              </li>
+              <li>
+                <Link to="/">Feed</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

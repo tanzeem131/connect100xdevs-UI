@@ -1,3 +1,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@keyframes blurReduce {
+  0% {
+    filter: blur(1rem);
+  }
+  100% {
+    filter: blur(0.05rem);
+  }
+}
+
+.animate-blur-reduce {
+  animation: blurReduce 1.5s ease-in-out forwards;
+}
+
+.great-vibes-regular {
+  font-family: "Great Vibes", cursive;
+}
