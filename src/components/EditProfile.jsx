@@ -8,6 +8,7 @@ import { addUser } from "../utils/userSlice";
 const EditProfile = ({ user }) => {
   const [firstName, setFirstName] = useState(user.firstName);
   const [lastName, setLastName] = useState(user.lastName);
+  const [githubUsername] = useState(user.githubUsername);
   const [photoUrl, setPhotoUrl] = useState(user.photoUrl || "");
   const [age, setAge] = useState(user.age || "");
   const [gender, setGender] = useState(user.gender || "");
@@ -39,7 +40,7 @@ const EditProfile = ({ user }) => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      setError(err.response?.data || "An unexpected error occurred");
+      setError(err?.response?.data || "An unexpected error occurred");
     }
   };
 
@@ -64,29 +65,39 @@ const EditProfile = ({ user }) => {
                   />
                 </label>
                 <label className="form-control w-full max-w-xs my-2">
-                  <label className="form-control w-full max-w-xs my-2">
-                    <div className="label">
-                      <span className="label-text">Last Name:</span>
-                    </div>
-                    <input
-                      type="text"
-                      value={lastName}
-                      maxLength={30}
-                      className="input input-bordered w-full max-w-xs"
-                      onChange={(e) => setLastName(e.target.value)}
-                    />
-                  </label>
                   <div className="label">
-                    <span className="label-text">Photo URL:</span>
+                    <span className="label-text">Last Name:</span>
                   </div>
                   <input
                     type="text"
-                    value={photoUrl}
+                    value={lastName}
+                    maxLength={30}
                     className="input input-bordered w-full max-w-xs"
-                    onChange={(e) => setPhotoUrl(e.target.value)}
-                    maxLength={500}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </label>
+                <label className="form-control w-full max-w-xs my-2">
+                  <div className="label">
+                    <span className="label-text">Github Username:</span>
+                  </div>
+                  <input
+                    type="text"
+                    value={githubUsername}
+                    maxLength={30}
+                    readOnly
+                    className="input input-bordered w-full max-w-xs"
+                  />
+                </label>
+                <div className="label">
+                  <span className="label-text">Photo URL:</span>
+                </div>
+                <input
+                  type="text"
+                  value={photoUrl}
+                  className="input input-bordered w-full max-w-xs"
+                  onChange={(e) => setPhotoUrl(e.target.value)}
+                  maxLength={500}
+                />
                 <label className="form-control w-full max-w-xs my-2">
                   <div className="label">
                     <span className="label-text">Age:</span>
@@ -146,7 +157,16 @@ const EditProfile = ({ user }) => {
           </div>
         </div>
         <UserCard
-          user={{ firstName, lastName, photoUrl, age, gender, skills, about }}
+          user={{
+            firstName,
+            lastName,
+            photoUrl,
+            age,
+            gender,
+            skills,
+            about,
+            githubUsername,
+          }}
         />
       </div>
       {showToast && (

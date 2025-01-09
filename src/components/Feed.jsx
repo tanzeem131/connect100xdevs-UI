@@ -24,13 +24,14 @@ const Feed = () => {
   useEffect(() => {
     getFeed();
   }, []);
+
   if (!feed) return;
 
   if (feed.length <= 0)
     return (
       <div className="flex justify-center h-screen items-center  bg-[url(image/background-img.webp)] bg-cover bg-no-repeat animate-verticalScroll">
         <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
-          No new user founds!
+          No new user found!
         </div>
       </div>
     );

@@ -10,6 +10,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
+  const [githubUsername, setGithubUsername] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -36,7 +37,7 @@ const Login = () => {
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
-        { firstName, lastName, emailId, password },
+        { firstName, lastName, emailId, password, githubUsername },
         { withCredentials: true }
       );
       dispatch(addUser(res.data.data));
@@ -84,6 +85,19 @@ const Login = () => {
                       onChange={(e) => setLastName(e.target.value)}
                     />
                   </label>
+                  <label className="form-control w-full max-w-xs my-2">
+                    <div className="label">
+                      <span className="label-text">Github Username:</span>
+                    </div>
+                    <input
+                      type="text"
+                      value={githubUsername}
+                      maxLength={40}
+                      required
+                      className="input input-bordered w-full max-w-xs"
+                      onChange={(e) => setGithubUsername(e.target.value)}
+                    />
+                  </label>
                 </>
               )}
               <label className="form-control w-full max-w-xs my-2">
@@ -112,7 +126,7 @@ const Login = () => {
                 />
               </label>
             </div>
-            <p className="text-red-500">{error}</p>
+            <div className="text-red-500">{error}</div>
             <div className="card-actions justify-center m-2">
               <button
                 className="btn btn-primary"
@@ -121,15 +135,14 @@ const Login = () => {
                 {isLoginForm ? "Login" : "Sign Up"}
               </button>
             </div>
-
-            <p
+            <div
               className="m-auto cursor-pointer py-2"
               onClick={() => setIsLoginForm((value) => !value)}
             >
               {isLoginForm
                 ? "New User? Signup Here"
                 : "Existing User? Login Here"}
-            </p>
+            </div>
           </div>
         </div>
       </div>

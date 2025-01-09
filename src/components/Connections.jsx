@@ -14,7 +14,7 @@ const Connections = () => {
       });
       dispatch(addConnections(res.data.data));
     } catch (err) {
-      // Handle Error Case
+      console.error(err);
     }
   };
 
@@ -70,16 +70,20 @@ const Connections = () => {
                 />
               </div>
               <div className="sm:text-left text-right mx-4 col-span-8">
-                <p className="font-bold sm:text-xl text-sm">
-                  {firstName + " " + lastName}
-                </p>
-                <p className="font-semibold sm:text-lg text-xs">{skills}</p>
-                {age && gender && (
+                {(firstName || lastName) && (
+                  <p className="font-bold sm:text-xl text-sm">
+                    {firstName + " " + lastName}
+                  </p>
+                )}
+                {skills && (
+                  <p className="font-semibold sm:text-lg text-xs">{skills}</p>
+                )}
+                {(age || gender) && (
                   <p className="font-semibold sm:text-lg text-xs">
                     {age + ", " + gender}
                   </p>
                 )}
-                <p>{about}</p>
+                {about && <p>{about}</p>}
               </div>
             </div>
           </div>
