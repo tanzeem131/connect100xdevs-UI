@@ -31,7 +31,7 @@ const Feed = () => {
     return (
       <div
         className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll"
-        style={{ backgroundImage: "url('/image/background-img.webp')" }}
+        style={{ backgroundImage: "url('/image/background-img.png')" }}
       >
         <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
           No new user found!
@@ -43,7 +43,7 @@ const Feed = () => {
     feed && (
       <div
         className="flex justify-center sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll"
-        style={{ backgroundImage: "url('/image/background-img.webp')" }}
+        style={{ backgroundImage: "url('/image/background-img.png)" }}
       >
         <UserCard user={feed[0]} />
       </div>
