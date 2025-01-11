@@ -29,7 +29,10 @@ const Feed = () => {
 
   if (feed.length <= 0)
     return (
-      <div className="flex justify-center h-screen items-center  bg-[url(image/background-img.webp)] bg-cover bg-no-repeat animate-verticalScroll">
+      <div
+        className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll"
+        style={{ backgroundImage: "url('/image/background-img.webp')" }}
+      >
         <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
           No new user found!
         </div>
@@ -38,7 +41,10 @@ const Feed = () => {
 
   return (
     feed && (
-      <div className="flex justify-center sm:py-20 py-4 bg-[url(image/background-img.webp)] bg-cover bg-no-repeat animate-verticalScroll">
+      <div
+        className="flex justify-center sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll"
+        style={{ backgroundImage: "url('/image/background-img.webp')" }}
+      >
         <UserCard user={feed[0]} />
       </div>
     )

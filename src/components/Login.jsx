@@ -4,48 +4,59 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
+import { useForm } from "react-hook-form";
 
 const Login = () => {
-  const [emailId, setEmailId] = useState("");
-  const [password, setPassword] = useState("");
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [githubUsername, setGithubUsername] = useState("");
   const [isLoginForm, setIsLoginForm] = useState(true);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const handleLogin = async () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const handleLogin = async (data) => {
     try {
       const res = await axios.post(
         BASE_URL + "/login",
         {
-          emailId,
-          password,
+          emailId: data.emailId,
+          password: data.password,
         },
         { withCredentials: true }
       );
       dispatch(addUser(res.data));
       return navigate("/");
     } catch (err) {
+      console.log(err?.response?.data);
       setError(err?.response?.data || "Something went wrong");
     }
   };
 
-  const handleSignUp = async () => {
+  const handleSignUp = async (data) => {
     try {
       const res = await axios.post(
         BASE_URL + "/signup",
-        { firstName, lastName, emailId, password, githubUsername },
+        {
+          firstName: data.firstName,
+          lastName: data.lastName,
+          emailId: data.emailId,
+          password: data.password,
+          githubUsername: data.githubUsername,
+        },
         { withCredentials: true }
       );
       dispatch(addUser(res.data.data));
       return navigate("/profile");
     } catch (err) {
-      setError(err?.response?.data || "Something went wrong");
+      console.log(err?.response?.data?.error);
+      setError(err?.response?.data?.error || "Something went wrong");
     }
   };
+  console.log("render");
 
   return (
     <div className="sm:grid flex grid-cols-12 flex-wrap justify-center bg-black my-0">
@@ -55,7 +66,9 @@ const Login = () => {
             <h2 className="card-title justify-center">
               {isLoginForm ? "Login" : "Sign Up"}
             </h2>
-            <div>
+            <form
+              onSubmit={handleSubmit(isLoginForm ? handleLogin : handleSignUp)}
+            >
               {!isLoginForm && (
                 <>
                   <label className="form-control w-full max-w-xs my-2">
@@ -64,13 +77,20 @@ const Login = () => {
                     </div>
                     <input
                       type="text"
-                      value={firstName}
-                      maxLength={30}
-                      minLength={2}
-                      required
+                      {...register("firstName", {
+                        required: "First Name is required",
+                        minLength: {
+                          value: 2,
+                          message: "Minimum length is 2 characters",
+                        },
+                      })}
                       className="input input-bordered w-full max-w-xs"
-                      onChange={(e) => setFirstName(e.target.value)}
                     />
+                    {errors.firstName && (
+                      <span className="text-red-500">
+                        {errors.firstName.message}
+                      </span>
+                    )}
                   </label>
                   <label className="form-control w-full max-w-xs my-2">
                     <div className="label">
@@ -78,25 +98,43 @@ const Login = () => {
                     </div>
                     <input
                       type="text"
-                      value={lastName}
-                      maxLength={30}
-                      minLength={2}
+                      {...register("lastName", {
+                        minLength: {
+                          value: 2,
+                          message: "Minimum length is 2 characters",
+                        },
+                      })}
                       className="input input-bordered w-full max-w-xs"
-                      onChange={(e) => setLastName(e.target.value)}
                     />
+                    {errors.lastName && (
+                      <span className="text-red-500">
+                        {errors.lastName.message}
+                      </span>
+                    )}
                   </label>
                   <label className="form-control w-full max-w-xs my-2">
                     <div className="label">
-                      <span className="label-text">Github Username:</span>
+                      <span className="label-text">
+                        Github Username (You must have atleast 50 public
+                        contributionsin in 2024):
+                      </span>
                     </div>
                     <input
                       type="text"
-                      value={githubUsername}
-                      maxLength={40}
-                      required
+                      {...register("githubUsername", {
+                        required: "Github Username is required",
+                        maxLength: {
+                          value: 40,
+                          message: "Maximum length is 40 characters",
+                        },
+                      })}
                       className="input input-bordered w-full max-w-xs"
-                      onChange={(e) => setGithubUsername(e.target.value)}
                     />
+                    {errors.githubUsername && (
+                      <span className="text-red-500">
+                        {errors.githubUsername.message}
+                      </span>
+                    )}
                   </label>
                 </>
               )}
@@ -105,13 +143,20 @@ const Login = () => {
                   <span className="label-text">Email ID:</span>
                 </div>
                 <input
-                  type="text"
-                  value={emailId}
-                  maxLength={40}
-                  required
+                  type="email"
+                  {...register("emailId", {
+                    required: "Email ID is required",
+                    pattern: {
+                      value:
+                        /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      message: "Enter a valid email address",
+                    },
+                  })}
                   className="input input-bordered w-full max-w-xs"
-                  onChange={(e) => setEmailId(e.target.value)}
                 />
+                {errors.emailId && (
+                  <span className="text-red-500">{errors.emailId.message}</span>
+                )}
               </label>
               <label className="form-control w-full max-w-xs my-2">
                 <div className="label">
@@ -119,22 +164,28 @@ const Login = () => {
                 </div>
                 <input
                   type="password"
-                  value={password}
-                  required
+                  {...register("password", {
+                    required: "Password is required",
+                    minLength: {
+                      value: 6,
+                      message: "Minimum length is 6 characters",
+                    },
+                  })}
                   className="input input-bordered w-full max-w-xs"
-                  onChange={(e) => setPassword(e.target.value)}
                 />
+                {errors.password && (
+                  <span className="text-red-500">
+                    {errors.password.message}
+                  </span>
+                )}
               </label>
-            </div>
-            <div className="text-red-500">{error}</div>
-            <div className="card-actions justify-center m-2">
-              <button
-                className="btn btn-primary"
-                onClick={isLoginForm ? handleLogin : handleSignUp}
-              >
-                {isLoginForm ? "Login" : "Sign Up"}
-              </button>
-            </div>
+              <div className="text-red-500">{error}</div>
+              <div className="card-actions justify-center m-2">
+                <button className="btn btn-primary" type="submit">
+                  {isLoginForm ? "Login" : "Sign Up"}
+                </button>
+              </div>
+            </form>
             <div
               className="m-auto cursor-pointer py-2"
               onClick={() => setIsLoginForm((value) => !value)}
@@ -155,4 +206,5 @@ const Login = () => {
     </div>
   );
 };
+
 export default Login;
