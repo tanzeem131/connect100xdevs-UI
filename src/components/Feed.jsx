@@ -43,7 +43,7 @@ const Feed = () => {
     feed && (
       <div
         className="flex justify-center sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll"
-        style={{ backgroundImage: "url('/image/background-img.png)" }}
+        style={{ backgroundImage: "url('/image/background-img.png')" }}
       >
         <UserCard user={feed[0]} />
       </div>

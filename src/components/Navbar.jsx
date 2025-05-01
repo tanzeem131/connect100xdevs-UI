@@ -19,6 +19,26 @@ const NavBar = () => {
     }
   };
 
+  const handleDeleteAccount = async () => {
+    try {
+      const confirmDelete = window.confirm(
+        "Are you sure you want to delete your account? This action cannot be undone."
+      );
+
+      if (!confirmDelete) {
+        return;
+      }
+
+      await axios.delete(BASE_URL + "/user/delete-account", {
+        withCredentials: true,
+      });
+      dispatch(removeUser());
+      return navigate("/login");
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
   return (
     <div className="navbar bg-black border-b-2 border-base-100 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
@@ -61,6 +81,9 @@ const NavBar = () => {
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
+              </li>
+              <li>
+                <a onClick={handleDeleteAccount}>Delete Account</a>
               </li>
             </ul>
           </div>
