@@ -42,8 +42,8 @@ const NavBar = () => {
   return (
     <div className="navbar bg-black border-b-2 border-base-100 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
-        <Link to="/" className="btn btn-ghost sm:text-xl text-sm">
-          connect100xdevs
+        <Link to="/" className="text-3xl text-white font-extrabold">
+          connect100<span className="text-red-600">x</span>devs
         </Link>
       </div>
       {user && (
