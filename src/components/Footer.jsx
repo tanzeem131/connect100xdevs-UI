@@ -1,9 +1,33 @@
+import axios from "axios";
 import { FiArrowUp } from "react-icons/fi";
 import { BsTwitterX, BsLinkedin } from "react-icons/bs";
 import { FaLocationArrow } from "react-icons/fa6";
 import { Link } from "react-router-dom";
+import { useState } from "react";
+import { BASE_URL } from "../utils/constants";
+import { toast } from "react-hot-toast";
 
 const Footer = () => {
+  const [email, setEmail] = useState("");
+
+  const handleEnquiry = async () => {
+    try {
+      if (!email) {
+        toast.error("Email is required");
+        return;
+      }
+      const res = await axios.post(
+        BASE_URL + "/enquiry",
+        { emailId: email },
+        { withCredentials: true }
+      );
+      toast.success(res?.data?.message);
+      setEmail("");
+    } catch (error) {
+      toast.error(error?.response?.data?.message);
+    }
+  };
+
   return (
     <footer className="relative bg-gradient-to-b from-black to-gray-950 min-h-screen">
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
@@ -28,10 +52,15 @@ const Footer = () => {
                 <input
                   type="email"
                   placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
                   className="w-full px-4 py-2 border-b-2 border-dotted border-gray-400 bg-transparent focus:outline-none focus:border-amber-700 text-center"
                 />
               </div>
-              <button className="px-8 py-3 border-2 border-orange-600/20 rounded-full text-orange-700 hover:bg-gray-100 transition-colors duration-300">
+              <button
+                onClick={handleEnquiry}
+                className="px-8 py-3 border-2 border-orange-600/20 rounded-full text-orange-700 hover:bg-gray-100 transition-colors duration-300"
+              >
                 Contact us
               </button>
             </div>
@@ -41,15 +70,15 @@ const Footer = () => {
             <p className="text-lg font-medium text-blue-600 mb-2">
               Why choose us?
             </p>
-            <a href="#" className="hover:text-amber-700 transition-colors">
+            <Link to="/" className="hover:text-amber-700 transition-colors">
               Reviews
-            </a>
-            <a href="#" className="hover:text-amber-700 transition-colors">
+            </Link>
+            <Link to="/" className="hover:text-amber-700 transition-colors">
               About
-            </a>
-            <a href="#" className="hover:text-amber-700 transition-colors">
+            </Link>
+            <Link to="/" className="hover:text-amber-700 transition-colors">
               FAQ
-            </a>
+            </Link>
           </div>
 
           <div className="space-y-8">
@@ -86,12 +115,12 @@ const Footer = () => {
             </div>
 
             <div className="flex space-x-8 text-sm">
-              <a href="#" className="text-blue-600 hover:underline">
+              <Link to="/" className="text-blue-600 hover:underline">
                 Cookies
-              </a>
-              <a href="#" className="text-blue-600 hover:underline">
+              </Link>
+              <Link to="/" className="text-blue-600 hover:underline">
                 Privacy Policy
-              </a>
+              </Link>
             </div>
 
             <div className="flex items-center space-x-4">
