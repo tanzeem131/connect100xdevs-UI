@@ -13,21 +13,17 @@ const Body = () => {
   const userData = useSelector((store) => store.user);
 
   const fetchUser = async () => {
-    if (!userData) {
-      navigate("/login");
-    } else {
-      if (userData) return;
-      try {
-        const res = await axios.get(BASE_URL + "/profile/view", {
-          withCredentials: true,
-        });
-        dispatch(addUser(res.data));
-      } catch (err) {
-        if (err.status === 401) {
-          navigate("/login");
-        }
-        console.error(err);
+    if (userData) return;
+    try {
+      const res = await axios.get(BASE_URL + "/profile/view", {
+        withCredentials: true,
+      });
+      dispatch(addUser(res.data));
+    } catch (err) {
+      if (err.status === 401) {
+        navigate("/login");
       }
+      console.error(err);
     }
   };
 
@@ -36,10 +32,13 @@ const Body = () => {
   }, []);
 
   return (
-    <div>
-      <NavBar />
-      <Outlet />
-      <Footer />
+    <div className="bg-black min-h-screen relative">
+      <div className="absolute inset-0 bg-[url('image/background-img.png')] bg-cover bg-center" />
+      <div className="relative min-h-screen bg-black/30 backdrop-blur-sm">
+        <NavBar />
+        <Outlet />
+        <Footer />
+      </div>
     </div>
   );
 };

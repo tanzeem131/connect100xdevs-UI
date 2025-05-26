@@ -158,18 +158,6 @@ const EditProfile = ({ user }) => {
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </label>
-                {/* <label className="form-control w-full max-w-xs my-1">
-                  <div className="label">
-                    <span className="label-text">Github Username:</span>
-                  </div>
-                  <input
-                    type="text"
-                    value={githubUsername}
-                    maxLength={30}
-                    readOnly
-                    className="input input-bordered w-full max-w-xs"
-                  />
-                </label> */}
                 <div className="label">
                   <span className="label-text">Photo URL:</span>
                 </div>
