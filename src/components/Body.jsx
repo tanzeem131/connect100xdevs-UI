@@ -33,7 +33,6 @@ const Body = () => {
 
   return (
     <div className="bg-black min-h-screen relative">
-      <div className="absolute inset-0 bg-[url('image/background-img.png')] bg-cover bg-center" />
       <div className="relative min-h-screen bg-black/30 backdrop-blur-sm">
         <NavBar />
         <Outlet />

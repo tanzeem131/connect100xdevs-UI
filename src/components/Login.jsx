@@ -220,8 +220,8 @@ const Login = () => {
 
       <section className="py-20 px-4 bg-[#111113]">
         <p className="text-4xl font-bold text-center mb-12">
-          Why{" "}
-          <span className="bg-gradient-to-r from-teal-600 to-yellow-600 bg-clip-text lg:!text-6xl md:!text-4xl sm:!text-xl vs:!text-xl  font-extrabold text-transparent text-center">
+          Why
+          <span className="bg-gradient-to-r from-teal-600 to-yellow-600 bg-clip-text lg:!text-6xl md:!text-4xl sm:!text-xl font-extrabold text-transparent text-center">
             connect100xdevs?
           </span>
         </p>
