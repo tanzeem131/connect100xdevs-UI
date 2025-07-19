@@ -1,7 +1,7 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useEffect } from "react";
-import { connect, useDispatch, useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
 
 const Connections = () => {
@@ -24,7 +24,7 @@ const Connections = () => {
 
   if (!connections)
     return (
-      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+      <div className="flex justify-center my-10 text-purple-600 h-screen">
         {" "}
         Connection not proccessed
       </div>
@@ -32,7 +32,7 @@ const Connections = () => {
 
   if (connections.length === 0)
     return (
-      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+      <div className="flex justify-center my-10 text-purple-600 h-screen">
         {" "}
         No Connection Found
       </div>
@@ -40,7 +40,7 @@ const Connections = () => {
 
   return (
     <div className="text-center my-10 min-h-screen">
-      <div className="text-bold text-[#BE7E40] sm:text-4xl text-xl">
+      <div className="text-bold text-purple-600 sm:text-4xl text-xl">
         Connections
       </div>
 
@@ -59,31 +59,46 @@ const Connections = () => {
         return (
           <div
             key={_id}
-            className="m-4 p-4 rounded-lg bg-base-300 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto"
+            className="m-4 p-6 rounded-2xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-2xl"
           >
-            <div className="grid grid-cols-12">
-              <div className="col-span-4">
+            <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
+              <div className="flex-shrink-0">
                 <img
-                  alt="photo"
-                  className="w-20 h-20 rounded-full object-cover"
+                  alt={`${firstName || ""} ${lastName || ""}'s photo`}
+                  className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-lg"
                   src={photoUrl}
                 />
               </div>
-              <div className="sm:text-left text-right mx-4 col-span-8">
+
+              <div className="flex-grow text-center sm:text-left">
                 {(firstName || lastName) && (
-                  <p className="font-bold sm:text-xl text-sm">
-                    {firstName + " " + lastName}
+                  <p className="font-extrabold text-2xl tracking-wide text-purple-400 mb-1">
+                    {firstName} {lastName}
                   </p>
                 )}
                 {skills && (
-                  <p className="font-semibold sm:text-lg text-xs">{skills}</p>
-                )}
-                {(age || gender) && (
-                  <p className="font-semibold sm:text-lg text-xs">
-                    {age + ", " + gender}
+                  <p className="font-medium text-lg text-gray-300 mb-1">
+                    {skills}
                   </p>
                 )}
-                {about && <p>{about}</p>}
+                {(age || gender) && (
+                  <p className="text-md text-gray-400 mb-2">
+                    {age}
+                    {age && gender ? ", " : ""}
+                    {gender}
+                  </p>
+                )}
+                {about && (
+                  <p className="text-sm text-gray-300 leading-relaxed italic">
+                    "{about}"
+                  </p>
+                )}
+              </div>
+
+              <div className="flex-shrink-0 mt-4 sm:mt-0">
+                <button className="px-6 py-2 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-200 ease-in-out transform hover:-translate-y-1">
+                  Chat
+                </button>
               </div>
             </div>
           </div>

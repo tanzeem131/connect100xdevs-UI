@@ -48,22 +48,26 @@ const NavBar = () => {
       </div>
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control sm:text-xl text-xs">
-            Welcome, {user.firstName}
+          <div className="form-control text-purple-600 sm:text-xl text-xs">
+            Welcome, <span className="text-white">{user.firstName}</span>
           </div>
-          <div className="dropdown dropdown-end sm:mx-5 mx-2 flex">
+          <div className="dropdown dropdown-end bg-black sm:mx-5 mx-2 flex">
             <div
               tabIndex={0}
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
               <div className="w-10 rounded-full">
-                <img alt="user photo" src={user.photoUrl} />
+                <img
+                  alt="user photo"
+                  className="rounded-full object-cover border-2 border-purple-500 "
+                  src={user.photoUrl}
+                />
               </div>
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 rounded-box z-[1] mt-16 w-52 p-2 shadow"
             >
               <li>
                 <Link to="/profile" className="justify-between">

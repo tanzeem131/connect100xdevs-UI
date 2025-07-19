@@ -45,7 +45,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
           <div className="flex flex-col items-center text-center">
             <div className="max-w-sm">
-              <h2 className="text-3xl font-serif text-amber-900 mb-6 italic">
+              <h2 className="text-3xl font-serif text-[#FF8C42] mb-6 italic">
                 Get Features Details!
               </h2>
               <div className="mb-6">
@@ -66,7 +66,7 @@ const Footer = () => {
             </div>
           </div>
 
-          <div className="flex flex-col space-y-4 text-gray-600">
+          <div className="flex flex-col space-y-4 text-[#E0E0E0]">
             <p className="text-lg font-medium text-blue-600 mb-2">
               Why choose us?
             </p>
@@ -92,7 +92,7 @@ const Footer = () => {
                     <span className="text-amber-700 font-semibold">Build</span>{" "}
                     meaningful connections.
                   </p>
-                  <p className="text-gray-600 text-sm mb-3">
+                  <p className="text-[#E0E0E0] text-sm mb-3">
                     Match with developers who share your passions, projects, and
                     tech stack.
                   </p>
@@ -110,7 +110,7 @@ const Footer = () => {
 
         <div className="max-w-7xl mx-auto mt-[30%]">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-[#E0E0E0]">
               © {new Date().getFullYear()} All rights reserved.
             </div>
 
@@ -124,20 +124,20 @@ const Footer = () => {
             </div>
 
             <div className="flex items-center space-x-4">
-              <span className="text-sm text-gray-600">Made by Tanzeem</span>
+              <span className="text-sm text-[#E0E0E0]">Made by Tanzeem</span>
               <div className="flex space-x-3">
                 <Link to="https://x.com/Tanzeem_Dev">
                   <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsTwitterX size={16} className="text-gray-600" />
+                    <BsTwitterX size={16} className="text-[#E0E0E0]" />
                   </button>
                 </Link>
                 <Link to="https://www.linkedin.com/in/mr-tanzeem/">
                   <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsLinkedin size={16} className="text-gray-600" />
+                    <BsLinkedin size={16} className="text-[#E0E0E0]" />
                   </button>
                 </Link>
                 <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                  <FiArrowUp size={16} className="text-gray-600" />
+                  <FiArrowUp size={16} className="text-[#E0E0E0]" />
                 </button>
               </div>
             </div>
