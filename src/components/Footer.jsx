@@ -128,16 +128,25 @@ const Footer = () => {
               <div className="flex space-x-3">
                 <Link to="https://x.com/Tanzeem_Dev">
                   <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsTwitterX size={16} className="text-[#E0E0E0]" />
+                    <BsTwitterX
+                      size={16}
+                      className="text-[#E0E0E0] hover:text-black"
+                    />
                   </button>
                 </Link>
                 <Link to="https://www.linkedin.com/in/mr-tanzeem/">
                   <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsLinkedin size={16} className="text-[#E0E0E0]" />
+                    <BsLinkedin
+                      size={16}
+                      className="text-[#E0E0E0] hover:text-black"
+                    />
                   </button>
                 </Link>
                 <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                  <FiArrowUp size={16} className="text-[#E0E0E0]" />
+                  <FiArrowUp
+                    size={16}
+                    className="text-[#E0E0E0] hover:text-black"
+                  />
                 </button>
               </div>
             </div>

@@ -1,6 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
 import NavBar from "./Navbar";
-import Footer from "./Footer";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
@@ -36,7 +35,6 @@ const Body = () => {
       <div className="relative min-h-screen bg-black/30 backdrop-blur-sm">
         <NavBar />
         <Outlet />
-        <Footer />
       </div>
     </div>
   );
