@@ -97,7 +97,7 @@ const Connections = () => {
               </div>
 
               <div className="flex-shrink-0 mt-4 sm:mt-0">
-                <Link to={"/chat"}>
+                <Link to={`/chat/${_id}`}>
                   <button className="px-6 py-2 bg-purple-600 text-white font-semibold rounded-full shadow-lg hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-opacity-75 transition duration-200 ease-in-out transform hover:-translate-y-1">
                     Chat
                   </button>
