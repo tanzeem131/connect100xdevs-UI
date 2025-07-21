@@ -3,6 +3,8 @@ import { BsFillSendFill } from "react-icons/bs";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
+import axios from "axios";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -10,6 +12,16 @@ const Chat = () => {
   const [newMessage, setNewMessage] = useState("");
   const userData = useSelector((store) => store.user);
   const userId = userData?._id;
+
+  const options = {
+    weekday: "short",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: true,
+  };
 
   useEffect(() => {
     if (!userId) {
@@ -20,7 +32,6 @@ const Chat = () => {
     socket.emit("joinChat", { userId, targetUserId });
 
     socket.on("messageReceived", ({ newMessage }) => {
-      console.log(newMessage);
       setMessages((messages) => [...messages, newMessage]);
     });
 
@@ -32,7 +43,28 @@ const Chat = () => {
   const sendMessage = () => {
     const socket = createSocketConnection();
     socket.emit("sendMessage", { userId, targetUserId, newMessage });
+    setNewMessage("");
   };
+
+  const fetchChats = async () => {
+    const getChats = await axios.get(BASE_URL + "/chat/" + targetUserId, {
+      withCredentials: true,
+    });
+    setMessages(
+      getChats.data.message.map((msg) => {
+        const { senderId, text, createdAt } = msg;
+        return {
+          senderId,
+          text,
+          createdAt,
+        };
+      })
+    );
+  };
+
+  useEffect(() => {
+    fetchChats();
+  }, []);
 
   return (
     <div className="flex flex-col h-screen bg-gray-950 text-gray-100">
@@ -46,49 +78,32 @@ const Chat = () => {
           <h2 className="text-xl font-semibold text-purple-400">John Doe</h2>{" "}
         </div>
       </div>
-
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 custom-scrollbar">
-        {messages.map((message, index) => (
-          <div key={index} className="flex justify-start">
-            <div className="bg-gray-800 text-gray-100 p-3 rounded-lg max-w-xs shadow-md">
-              <p>{message}</p>
-              <span className="text-xs text-gray-500 mt-1 block text-right">
-                10:00 AM
+      <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4">
+        {messages.map((msg, index) => (
+          <div
+            key={index}
+            className={`flex ${
+              msg.senderId === userId ? "justify-end" : "justify-start"
+            }`}
+          >
+            <div
+              className={`text-gray-100 p-[6px] rounded-lg max-w-xs shadow-md 
+                ${msg.senderId === userId ? "bg-purple-600" : "bg-gray-800"}
+              `}
+            >
+              <p>{msg.text}</p>
+              <span
+                className={`text-[10px] mt-1 block text-right" + ${
+                  msg.senderId === userId ? "text-white" : "text-gray-500"
+                }
+                `}
+              >
+                {new Date(msg.createdAt).toLocaleString("en-US", options)}
               </span>
             </div>
           </div>
         ))}
-        {/* Example incoming message */}
-        {/* <div className="flex justify-start">
-          <div className="bg-gray-800 text-gray-100 p-3 rounded-lg max-w-xs shadow-md">
-            <p>Hey there! How are you?</p>
-            <span className="text-xs text-gray-500 mt-1 block text-right">
-              10:00 AM
-            </span>
-          </div>
-        </div> */}
-
-        {/* Example outgoing message */}
-        {/* <div className="flex justify-end">
-          <div className="bg-purple-600 text-white p-3 rounded-lg max-w-xs shadow-md">
-            <p>I'm doing great, thanks for asking! How about you?</p>
-            <span className="text-xs text-purple-200 mt-1 block text-right">
-              10:02 AM
-            </span>
-          </div>
-        </div> */}
-
-        {/* Another example incoming message */}
-        {/* <div className="flex justify-start">
-          <div className="bg-gray-800 text-gray-100 p-3 rounded-lg max-w-xs shadow-md">
-            <p>Doing pretty well! Just finishing up some work.</p>
-            <span className="text-xs text-gray-500 mt-1 block text-right">
-              10:05 AM
-            </span>
-          </div>
-        </div> */}
       </div>
-
       <div className="p-4 bg-gray-900 border-t border-gray-800 flex items-center space-x-3 shadow-lg">
         <input
           type="text"

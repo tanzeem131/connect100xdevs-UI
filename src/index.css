@@ -18,3 +18,16 @@
 .great-vibes-regular {
   font-family: "Great Vibes", cursive;
 }
+
+.hide-scrollbar {
+  /* For Firefox */
+  scrollbar-width: none;
+
+  /* For Internet Explorer and Edge (legacy) */
+  -ms-overflow-style: none; /* IE and Edge */
+
+  /* For Chrome, Safari, and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
