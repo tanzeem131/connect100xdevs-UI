@@ -1,20 +1,25 @@
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
+import { Loader } from "./Loader";
 
 const Connections = () => {
+  const [loading, setLoading] = useState(false);
   const connections = useSelector((store) => store.connections);
   const dispatch = useDispatch();
   const fetchConnections = async () => {
     try {
+      setLoading(true);
       const res = await axios.get(BASE_URL + "/user/connections", {
         withCredentials: true,
       });
       dispatch(addConnections(res.data.data));
+      setLoading(false);
     } catch (err) {
+      setLoading(false);
       console.error(err);
     }
   };
@@ -39,8 +44,16 @@ const Connections = () => {
       </div>
     );
 
+  if (loading) {
+    return (
+      <div className="flex justify-center align-middle items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
+
   return (
-    <div className="text-center my-10 min-h-screen">
+    <div className="text-center mt-10 min-h-screen">
       <div className="text-bold text-purple-600 sm:text-4xl text-xl">
         Connections
       </div>

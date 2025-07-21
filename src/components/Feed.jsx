@@ -2,23 +2,33 @@ import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import UserCard from "./UserCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { Loader } from "./Loader";
 
 const Feed = () => {
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
 
   const getFeed = async () => {
-    if (feed && feed.length > 0) return;
+    if (feed && feed.length > 0) {
+      setLoading(false);
+      return;
+    }
     try {
+      setLoading(true);
       const res = await axios.get(BASE_URL + "/user/feed", {
         withCredentials: true,
       });
       dispatch(addFeed(res?.data?.data));
+      setLoading(false);
     } catch (err) {
       console.error(err);
+      setError("Something went wrong while loading feed.");
+      setLoading(false);
     }
   };
 
@@ -26,9 +36,25 @@ const Feed = () => {
     getFeed();
   }, []);
 
-  if (!feed) return null;
+  if (loading) {
+    return (
+      <div className="flex justify-center align-middle items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
 
-  if (feed.length === 0)
+  if (error) {
+    return (
+      <div className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll">
+        <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
+          {error}
+        </div>
+      </div>
+    );
+  }
+
+  if (feed?.length === 0) {
     return (
       <div className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll">
         <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
@@ -36,6 +62,7 @@ const Feed = () => {
         </div>
       </div>
     );
+  }
 
   return (
     <div className="flex justify-center items-center gap-5 sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll">

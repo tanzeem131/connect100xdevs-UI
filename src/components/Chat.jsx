@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
 import { createSocketConnection } from "../utils/socket";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addConnections } from "../utils/connectionSlice";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
@@ -10,8 +11,30 @@ const Chat = () => {
   const { targetUserId } = useParams();
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState("");
+  const [targetUser, setTargetUser] = useState({});
   const userData = useSelector((store) => store.user);
   const userId = userData?._id;
+
+  const connections = useSelector((store) => store.connections);
+  const dispatch = useDispatch();
+  const fetchConnections = async () => {
+    try {
+      const res = await axios.get(BASE_URL + "/user/connections", {
+        withCredentials: true,
+      });
+      dispatch(addConnections(res.data.data));
+    } catch (err) {
+      console.error(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchConnections();
+    if (connections && Array.isArray(connections)) {
+      const foundUser = connections?.find((user) => user._id === targetUserId);
+      setTargetUser(foundUser);
+    }
+  }, [connections]);
 
   const options = {
     weekday: "short",
@@ -71,11 +94,13 @@ const Chat = () => {
       <div className="flex items-center justify-between p-4 bg-gray-900 shadow-md">
         <div className="flex items-center space-x-3">
           <img
-            src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=1887&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" // Placeholder for recipient's photo
+            src={targetUser?.photoUrl}
             alt="Recipient Profile"
             className="w-10 h-10 rounded-full object-cover border-2 border-purple-500"
           />
-          <h2 className="text-xl font-semibold text-purple-400">John Doe</h2>{" "}
+          <h2 className="text-xl font-semibold text-purple-400">
+            {targetUser?.firstName} {targetUser?.lastName}
+          </h2>{" "}
         </div>
       </div>
       <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4">

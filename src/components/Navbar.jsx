@@ -48,8 +48,11 @@ const NavBar = () => {
       </div>
       {user && (
         <div className="flex-none gap-2">
-          <div className="form-control text-purple-600 sm:text-xl text-xs">
-            Welcome, <span className="text-white">{user.firstName}</span>
+          <div className="form-control text-purple-600 sm:text-sm text-xs">
+            Welcome,{" "}
+            <span className="text-white sm:text-xl text-xs">
+              {user.firstName}
+            </span>
           </div>
           <div className="dropdown dropdown-end bg-black sm:mx-5 mx-2 flex">
             <div

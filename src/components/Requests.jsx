@@ -34,14 +34,14 @@ const Requests = () => {
 
   if (!requests)
     return (
-      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+      <div className="flex justify-center my-10 text-purple-600 text-xl">
         Request not processed
       </div>
     );
 
   if (requests.length === 0)
     return (
-      <div className="flex justify-center my-10 text-[#BE7E40] h-screen">
+      <div className="flex justify-center my-10 text-purple-600 text-xl">
         {" "}
         No Request Found
       </div>
@@ -49,7 +49,7 @@ const Requests = () => {
 
   return (
     // <div className="text-center my-10 h-screen">
-    //   <h1 className="text-bold text-[#BE7E40] sm:text-4xl text-xl">Requests</h1>
+    //   <h1 className="text-bold text-purple-600 text-xl">quests</h1>
 
     //   {requests.map((request) => {
     //     const { _id, firstName, lastName, photoUrl, age, gender, about } =
@@ -93,9 +93,7 @@ const Requests = () => {
     //   })}
     // </div>
     <div className="text-center my-10 min-h-screen">
-      <div className="text-bold text-[#BE7E40] sm:text-4xl text-xl">
-        Requests
-      </div>
+      <div className="text-bold text-purple-600 text-xl">Requests</div>
 
       {requests.map((request) => {
         const {
