@@ -5,7 +5,7 @@ import { addUser } from "../utils/userSlice";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { useForm } from "react-hook-form";
-import Footer from "./Footer";
+import Footer from "../components/Footer";
 
 const HERO_IMAGE = "image/login.avif";
 

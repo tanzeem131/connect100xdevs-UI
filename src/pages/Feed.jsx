@@ -3,9 +3,9 @@ import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";
 import { addFeed } from "../utils/feedSlice";
 import { useEffect, useState } from "react";
-import UserCard from "./UserCard";
+import UserCard from "../components/UserCard";
 import { motion, AnimatePresence } from "framer-motion";
-import { Loader } from "./Loader";
+import { Loader } from "../components/Loader";
 
 const Feed = () => {
   const [loading, setLoading] = useState(true);

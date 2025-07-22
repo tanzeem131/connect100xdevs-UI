@@ -1,5 +1,5 @@
 import { Outlet, useNavigate } from "react-router-dom";
-import NavBar from "./Navbar";
+import NavBar from "../components/Navbar";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 import { useDispatch, useSelector } from "react-redux";

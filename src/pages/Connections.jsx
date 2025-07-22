@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnections } from "../utils/connectionSlice";
 import { Link } from "react-router-dom";
-import { Loader } from "./Loader";
+import { Loader } from "../components/Loader";
 
 const Connections = () => {
   const [loading, setLoading] = useState(false);
