@@ -8,6 +8,8 @@ import Feed from "./pages/Feed";
 import Connections from "./pages/Connections";
 import Requests from "./pages/Requests";
 import Chat from "./pages/Chat";
+import AboutUsPage from "./pages/About";
+import ReviewPage from "./pages/Review";
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
+              <Route path="/about" element={<AboutUsPage />} />
+              <Route path="/reviews" element={<ReviewPage />} />
               <Route path="/chat/:targetUserId" element={<Chat />} />
             </Route>
           </Routes>

@@ -6,12 +6,15 @@ import { useEffect, useState } from "react";
 import UserCard from "../components/UserCard";
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader } from "../components/Loader";
+import { TextInputError } from "../components/TextInput";
+import { useNavigate } from "react-router-dom";
 
 const Feed = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const feed = useSelector((store) => store.feed);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const getFeed = async () => {
     if (feed && feed.length > 0) {
@@ -45,23 +48,15 @@ const Feed = () => {
   }
 
   if (error) {
-    return (
-      <div className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll">
-        <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
-          {error}
-        </div>
-      </div>
-    );
+    return navigate("/login");
+  }
+
+  if (!feed) {
+    return <TextInputError text={error} />;
   }
 
   if (feed?.length === 0) {
-    return (
-      <div className="flex justify-center h-screen items-center bg-cover bg-no-repeat animate-verticalScroll">
-        <div className="text-black text-3xl font-extrabold bg-white p-4 rounded-xl">
-          No new user found!
-        </div>
-      </div>
-    );
+    return <TextInputError text={"No new user found!"} />;
   }
 
   return (

@@ -28,6 +28,13 @@ const Footer = () => {
     }
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <footer className="relative bg-gradient-to-b from-black to-gray-950 min-h-screen">
       <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
@@ -70,14 +77,17 @@ const Footer = () => {
             <p className="text-lg font-medium text-blue-600 mb-2">
               Why choose us?
             </p>
-            <Link to="/" className="hover:text-amber-700 transition-colors">
+            <Link
+              to="/reviews"
+              className="hover:text-amber-700 transition-colors"
+            >
               Reviews
             </Link>
-            <Link to="/" className="hover:text-amber-700 transition-colors">
+            <Link
+              to="/about"
+              className="hover:text-amber-700 transition-colors"
+            >
               About
-            </Link>
-            <Link to="/" className="hover:text-amber-700 transition-colors">
-              FAQ
             </Link>
           </div>
 
@@ -97,7 +107,10 @@ const Footer = () => {
                     tech stack.
                   </p>
                   <Link to="/login">
-                    <button className="text-amber-700 font-medium text-sm hover:cursor-pointer flex justify-center items-center gap-1">
+                    <button
+                      onClick={scrollToTop}
+                      className="text-amber-700 font-medium text-sm hover:cursor-pointer flex justify-center items-center gap-1"
+                    >
                       Let's GO
                       <FaLocationArrow />
                     </button>
@@ -111,14 +124,14 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto mt-[30%]">
           <div className="flex flex-col lg:flex-row justify-between items-center space-y-6 lg:space-y-0">
             <div className="text-sm text-[#E0E0E0]">
-              © {new Date().getFullYear()} All rights reserved.
+              © {new Date().getFullYear()} Connect100xDevs. All rights reserved.
             </div>
 
             <div className="flex space-x-8 text-sm">
-              <Link to="/" className="text-blue-600 hover:underline">
+              <Link to="#" className="text-blue-600 hover:underline">
                 Cookies
               </Link>
-              <Link to="/" className="text-blue-600 hover:underline">
+              <Link to="#" className="text-blue-600 hover:underline">
                 Privacy Policy
               </Link>
             </div>
@@ -127,26 +140,20 @@ const Footer = () => {
               <span className="text-sm text-[#E0E0E0]">Made by Tanzeem</span>
               <div className="flex space-x-3">
                 <Link to="https://x.com/Tanzeem_Dev">
-                  <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsTwitterX
-                      size={16}
-                      className="text-[#E0E0E0] hover:text-black"
-                    />
+                  <button className="w-10 h-10 rounded-full border-2 border-gray-400 hover:border-blue-700 flex items-center justify-center transition-colors">
+                    <BsTwitterX size={16} className="text-[#E0E0E0]" />
                   </button>
                 </Link>
                 <Link to="https://www.linkedin.com/in/mr-tanzeem/">
-                  <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                    <BsLinkedin
-                      size={16}
-                      className="text-[#E0E0E0] hover:text-black"
-                    />
+                  <button className="w-10 h-10 rounded-full border-2 border-gray-400 hover:border-blue-700 flex items-center justify-center transition-colors">
+                    <BsLinkedin size={16} className="text-[#E0E0E0]" />
                   </button>
                 </Link>
-                <button className="w-10 h-10 rounded-full border-2 border-gray-400 flex items-center justify-center hover:bg-gray-100 transition-colors">
-                  <FiArrowUp
-                    size={16}
-                    className="text-[#E0E0E0] hover:text-black"
-                  />
+                <button
+                  onClick={scrollToTop}
+                  className="w-10 h-10 rounded-full border-2 border-gray-400 hover:border-blue-700 flex items-center justify-center transition-colors"
+                >
+                  <FiArrowUp size={16} className="text-[#E0E0E0]" />
                 </button>
               </div>
             </div>
