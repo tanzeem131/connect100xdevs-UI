@@ -1,11 +1,11 @@
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { BsFillSendFill } from "react-icons/bs";
-import { createSocketConnection } from "../utils/socket";
-import { useDispatch, useSelector } from "react-redux";
-import { addConnections } from "../utils/connectionSlice";
+import { useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-import axios from "axios";
+import { createSocketConnection } from "../utils/socket";
+import useFetchConnections from "../hooks/useFetchConnection";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -15,21 +15,9 @@ const Chat = () => {
   const userData = useSelector((store) => store.user);
   const userId = userData?._id;
 
-  const connections = useSelector((store) => store.connections);
-  const dispatch = useDispatch();
-  const fetchConnections = async () => {
-    try {
-      const res = await axios.get(BASE_URL + "/user/connections", {
-        withCredentials: true,
-      });
-      dispatch(addConnections(res.data.data));
-    } catch (err) {
-      console.error(err);
-    }
-  };
+  const { connections } = useFetchConnections();
 
   useEffect(() => {
-    fetchConnections();
     if (connections && Array.isArray(connections)) {
       const foundUser = connections?.find((user) => user._id === targetUserId);
       setTargetUser(foundUser);
@@ -54,8 +42,8 @@ const Chat = () => {
     const socket = createSocketConnection();
     socket.emit("joinChat", { userId, targetUserId });
 
-    socket.on("messageReceived", ({ newMessage }) => {
-      setMessages((messages) => [...messages, newMessage]);
+    socket.on("messageReceived", ({ text, createdAt, senderId }) => {
+      setMessages((messages) => [...messages, { senderId, text, createdAt }]);
     });
 
     return () => {
@@ -64,8 +52,10 @@ const Chat = () => {
   }, [userId, targetUserId]);
 
   const sendMessage = () => {
+    if (!newMessage) return;
+    const optimizedMessage = newMessage.trim();
     const socket = createSocketConnection();
-    socket.emit("sendMessage", { userId, targetUserId, newMessage });
+    socket.emit("sendMessage", { userId, targetUserId, optimizedMessage });
     setNewMessage("");
   };
 
@@ -91,19 +81,19 @@ const Chat = () => {
 
   return (
     <div className="flex flex-col h-screen bg-gray-950 text-gray-100">
-      <div className="flex items-center justify-between p-4 bg-gray-900 shadow-md">
+      <div className="flex items-center justify-between p-4 bg-transparent shadow-md">
         <div className="flex items-center space-x-3">
           <img
             src={targetUser?.photoUrl}
             alt="Recipient Profile"
-            className="w-10 h-10 rounded-full object-cover border-2 border-purple-500"
+            className="w-10 h-10 rounded-full object-cover border-2 border-purple-600"
           />
-          <h2 className="text-xl font-semibold text-purple-400">
+          <h2 className="text-xl font-semibold text-purple-600">
             {targetUser?.firstName} {targetUser?.lastName}
-          </h2>{" "}
+          </h2>
         </div>
       </div>
-      <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4">
+      <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4 chat-background-pattern">
         {messages.map((msg, index) => (
           <div
             key={index}
@@ -129,7 +119,7 @@ const Chat = () => {
           </div>
         ))}
       </div>
-      <div className="p-4 bg-gray-900 border-t border-gray-800 flex items-center space-x-3 shadow-lg">
+      <div className="p-4 bg-transparent border-t border-gray-800 flex items-center space-x-3 shadow-lg">
         <input
           type="text"
           value={newMessage}

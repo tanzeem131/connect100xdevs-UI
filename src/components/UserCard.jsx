@@ -6,6 +6,7 @@ import { FaGithub } from "react-icons/fa";
 import { IoMdTime } from "react-icons/io";
 import { FaUserAlt } from "react-icons/fa";
 import GitHubCalendar from "react-github-calendar";
+import { UserCardBtn } from "./Button";
 
 const UserCard = ({ user }) => {
   const {
@@ -103,18 +104,18 @@ const UserCard = ({ user }) => {
         )}
         <GitHubCalendar username={githubUsername} />
         <div className="pt-2 flex justify-between gap-4">
-          <button
+          <UserCardBtn
             onClick={() => handleSendRequest("ignored", _id)}
-            className="w-1/2 py-3 rounded-xl bg-gray-700/50 backdrop-blur-sm text-gray-300 border border-gray-600 hover:bg-gray-600/70 transition-colors font-semibold shadow-lg transform hover:-translate-y-1"
-          >
-            Ignore
-          </button>
-          <button
+            text={"Ignore"}
+            firstColor={"zinc"}
+            secondColor={"neutral"}
+          />
+          <UserCardBtn
             onClick={() => handleSendRequest("interested", _id)}
-            className="w-1/2 py-3 rounded-xl bg-gradient-to-r from-purple-600 to-blue-500 text-white font-bold shadow-lg hover:from-purple-700 hover:to-blue-600 transition-all duration-300 transform hover:-translate-y-1"
-          >
-            Interested
-          </button>
+            text={"Interested"}
+            firstColor={"purple"}
+            secondColor={"blue"}
+          />
         </div>
       </div>
     </div>
