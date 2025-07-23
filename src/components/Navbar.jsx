@@ -42,7 +42,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-black border-b-2 border-base-100 sm:px-0 md:px-4 lg:px-6">
+    <div className="navbar bg-black border-b-2 border-purple-800 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
         <Link to="/" className="text-3xl text-white font-extrabold">
           connect100<span className="text-red-600">x</span>devs
@@ -72,12 +72,10 @@ const NavBar = () => {
             </div>
             <ul
               tabIndex={0}
-              className="menu menu-sm dropdown-content bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 rounded-box z-[1] mt-16 w-52 p-2 shadow"
+              className="menu menu-sm dropdown-content bg-black border-2 border-purple-800 rounded-lg text-gray-100 z-[1] mt-16 w-52 p-2 shadow"
             >
               <li>
-                <Link to="/profile" className="justify-between">
-                  Profile
-                </Link>
+                <Link to="/profile">Profile</Link>
               </li>
               <li>
                 <Link to="/connections">Connections</Link>
@@ -92,7 +90,9 @@ const NavBar = () => {
                 <a onClick={handleLogout}>Logout</a>
               </li>
               <li>
-                <a onClick={handleDeleteAccount}>Delete Account</a>
+                <a onClick={handleDeleteAccount} className="text-red-600">
+                  Delete Account
+                </a>
               </li>
             </ul>
           </div>

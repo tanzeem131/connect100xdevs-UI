@@ -130,9 +130,11 @@ const EditProfile = ({ user }) => {
     <>
       <div className="flex flex-wrap justify-center mt-10">
         <div className="flex justify-center mx-10">
-          <div className="card bg-gray-400/5 w-96 shadow-xl border-2 border-purple-700/20">
+          <div className="card bg-gray-400/5 w-96 shadow-xl border-2 rounded-lg border-purple-700/20">
             <div className="card-body">
-              <h2 className="card-title justify-center">Edit Profile</h2>
+              <h2 className="card-title justify-center border-2 border-purple-600 p-2 rounded-full">
+                Edit Profile
+              </h2>
               <div>
                 <label className="form-control w-full max-w-xs my-1">
                   <div className="label">
@@ -141,7 +143,7 @@ const EditProfile = ({ user }) => {
                   <input
                     type="text"
                     value={firstName}
-                    className="input input-bordered w-full max-w-xs bg-black"
+                    className="input rounded-lg input-bordered w-full max-w-xs bg-black"
                     maxLength={30}
                     onChange={(e) => setFirstName(e.target.value)}
                   />
@@ -154,7 +156,7 @@ const EditProfile = ({ user }) => {
                     type="text"
                     value={lastName}
                     maxLength={30}
-                    className="input input-bordered w-full max-w-xs bg-black"
+                    className="input rounded-lg input-bordered w-full max-w-xs bg-black"
                     onChange={(e) => setLastName(e.target.value)}
                   />
                 </label>
@@ -164,7 +166,7 @@ const EditProfile = ({ user }) => {
                 <input
                   type="text"
                   value={photoUrl}
-                  className="input input-bordered w-full max-w-xs bg-black"
+                  className="input rounded-lg input-bordered w-full max-w-xs bg-black"
                   onChange={(e) => setPhotoUrl(e.target.value)}
                   maxLength={500}
                 />
@@ -175,7 +177,7 @@ const EditProfile = ({ user }) => {
                   <input
                     type="text"
                     value={age}
-                    className="input input-bordered w-full max-w-xs bg-black"
+                    className="input rounded-lg input-bordered w-full max-w-xs bg-black"
                     onChange={(e) => setAge(e.target.value)}
                   />
                 </label>
@@ -225,7 +227,7 @@ const EditProfile = ({ user }) => {
                     value={skills}
                     minLength={0}
                     maxLength={100}
-                    className="input input-bordered text-wrap max-w-xs bg-black"
+                    className="input rounded-lg input-bordered text-wrap max-w-xs bg-black"
                     onChange={(e) => setSkills(e.target.value)}
                   />
                 </label>
@@ -238,14 +240,17 @@ const EditProfile = ({ user }) => {
                     value={about}
                     minLength={0}
                     maxLength={100}
-                    className="input input-bordered text-wrap max-w-xs bg-black"
+                    className="input rounded-lg input-bordered text-wrap max-w-xs bg-black"
                     onChange={(e) => setAbout(e.target.value)}
                   />
                 </label>
               </div>
               <p className="text-red-500">{error}</p>
               <div className="card-actions justify-center m-1">
-                <button className="btn btn-primary" onClick={saveProfile}>
+                <button
+                  className="btn btn-primary bg-green-800 rounded-md"
+                  onClick={saveProfile}
+                >
                   Save Profile
                 </button>
               </div>
