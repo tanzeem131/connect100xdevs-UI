@@ -18,7 +18,7 @@ export const Card = ({
   onClickReject,
 }) => {
   return (
-    <div className="m-4 p-4 rounded-2xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="sm:m-4 sm:p-4 m-8 p-2 sm:mx-auto rounded-2xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 w-fit transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
       <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
         <div className="flex-shrink-0">
           <img
@@ -48,7 +48,7 @@ export const Card = ({
               "{about}"
             </p>
           )}
-          <div className="max-w-[450px]">
+          <div className="sm:max-w-[450px] max-w-[350px] ">
             {githubUsername && (
               <a
                 href={`https://github.com/${githubUsername}`}
@@ -70,7 +70,7 @@ export const Card = ({
             </Link>
           )}
           {actions === "request" && (
-            <div className="flex flex-col gap-5">
+            <div className="flex sm:flex-col flex-row gap-5">
               <RequestBtn
                 text={"Accept"}
                 onClick={onClickAccept}

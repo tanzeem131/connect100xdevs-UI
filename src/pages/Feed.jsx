@@ -60,7 +60,7 @@ const Feed = () => {
   }
 
   return (
-    <div className="flex justify-center items-center gap-5 sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll">
+    <div className="flex flex-wrap justify-center items-center gap-5 sm:py-20 py-4 bg-cover bg-no-repeat animate-verticalScroll">
       <AnimatePresence>
         {feed.slice(0, 3).map((user, index) => (
           <motion.div
