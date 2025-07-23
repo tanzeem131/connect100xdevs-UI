@@ -1,5 +1,7 @@
 import { Link } from "react-router-dom";
 import { RequestBtn } from "./Button";
+import { FaGithub } from "react-icons/fa";
+import GitHubCalendar from "react-github-calendar";
 
 export const Card = ({
   _id,
@@ -10,16 +12,17 @@ export const Card = ({
   gender,
   skills,
   about,
+  githubUsername,
   actions,
   onClickAccept,
   onClickReject,
 }) => {
   return (
-    <div className="m-4 p-6 rounded-2xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
+    <div className="m-4 p-4 rounded-2xl shadow-xl bg-gradient-to-br from-gray-800 to-gray-900 text-gray-100 sm:w-[95%] lg:w-1/2 md:w-2/3 mx-auto transform transition-all duration-300 hover:scale-105 hover:shadow-2xl">
       <div className="flex flex-col sm:flex-row items-center sm:items-start space-y-4 sm:space-y-0 sm:space-x-6">
         <div className="flex-shrink-0">
           <img
-            alt={`${firstName || ""} ${lastName || ""}'s photo`}
+            alt={`${firstName || ""}'s photo`}
             className="w-24 h-24 rounded-full object-cover border-4 border-purple-500 shadow-lg"
             src={photoUrl}
           />
@@ -45,6 +48,18 @@ export const Card = ({
               "{about}"
             </p>
           )}
+          <div className="max-w-[450px]">
+            {githubUsername && (
+              <a
+                href={`https://github.com/${githubUsername}`}
+                className="w-fit flex items-center gap-2 my-2 bg-gray-700/70 backdrop-blur-sm text-gray-200 px-1 py-1 rounded-full text-[12px] font-semibold hover:bg-gray-600 hover:text-white transition-colors duration-200 shadow-md border border-gray-600"
+              >
+                <FaGithub className="text-xl" />
+                <span>{githubUsername}</span>
+              </a>
+            )}
+            <GitHubCalendar username={githubUsername} />
+          </div>
         </div>
         <div className="flex-shrink-0 mt-4 sm:mt-0">
           {actions === "connection" && (
@@ -59,12 +74,12 @@ export const Card = ({
               <RequestBtn
                 text={"Accept"}
                 onClick={onClickAccept}
-                color={"green"}
+                color={"border-green-600"}
               />
               <RequestBtn
                 text={"Reject"}
                 onClick={onClickReject}
-                color={"red"}
+                color={"border-red-600"}
               />
             </div>
           )}

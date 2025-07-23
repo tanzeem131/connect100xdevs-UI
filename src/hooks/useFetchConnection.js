@@ -17,7 +17,7 @@ const useFetchConnections = () => {
           const res = await axios.get(BASE_URL + "/user/connections", {
             withCredentials: true,
           });
-          dispatch(addConnections(res.data.data));
+          dispatch(addConnections(res?.data?.data));
           setLoading(false);
         } catch (err) {
           console.error("Failed to fetch connections:", err);
@@ -26,7 +26,7 @@ const useFetchConnections = () => {
       };
       fetchData();
     }
-  }, [dispatch, connections]);
+  }, []);
 
   return { connections, loading };
 };

@@ -107,14 +107,14 @@ const UserCard = ({ user }) => {
           <UserCardBtn
             onClick={() => handleSendRequest("ignored", _id)}
             text={"Ignore"}
-            firstColor={"zinc"}
-            secondColor={"neutral"}
+            firstColor={"from-gray-600"}
+            secondColor={"to-gray-800"}
           />
           <UserCardBtn
             onClick={() => handleSendRequest("interested", _id)}
             text={"Interested"}
-            firstColor={"purple"}
-            secondColor={"blue"}
+            firstColor={"from-purple-600"}
+            secondColor={"to-blue-600"}
           />
         </div>
       </div>

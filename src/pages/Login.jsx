@@ -70,9 +70,6 @@ const Login = () => {
               <span className="text-red-600">x</span>devs
             </p>
             <p className="border-b-2 border-[rgba(255,255,255,0.2)] mb-3"></p>
-            {error && (
-              <div className="text-red-500 text-center mb-4">{error}</div>
-            )}
             <form
               onSubmit={handleSubmit(isLoginForm ? handleLogin : handleSignUp)}
               className="space-y-4"
@@ -194,6 +191,11 @@ const Login = () => {
                 {isLoginForm ? "Login" : "Sign Up"}
               </button>
             </form>
+            {error && (
+              <div className="text-red-500 text-center my-2 text-sm">
+                {error}
+              </div>
+            )}
             <div
               className="text-center mt-4 text-[#edeef0] cursor-pointer hover:underline"
               onClick={() => setIsLoginForm((value) => !value)}

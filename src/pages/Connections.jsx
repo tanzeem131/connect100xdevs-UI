@@ -34,6 +34,7 @@ const Connections = () => {
           gender,
           skills,
           about,
+          githubUsername,
         } = connection;
 
         return (
@@ -47,6 +48,7 @@ const Connections = () => {
               gender={gender}
               skills={skills}
               about={about}
+              githubUsername={githubUsername}
               actions={"connection"}
             />
           </div>
