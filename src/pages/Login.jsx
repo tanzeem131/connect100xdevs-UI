@@ -131,7 +131,7 @@ const Login = () => {
                         },
                       })}
                       className="w-full px-4 py-2 bg-gray-700/20 border border-gray-600/10 rounded-lg text-[#edeef0] focus:outline-none focus:ring-1 focus:ring-[rgb(38,38,38,0.3)]"
-                      placeholder="At least 50 public contributions in 2024"
+                      placeholder="Github User Name"
                     />
                     {errors.githubUsername && (
                       <span className="text-red-500 text-sm">
