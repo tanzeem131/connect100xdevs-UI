@@ -265,6 +265,9 @@
 import { FaGithub } from "react-icons/fa";
 import { BASE_URL } from "../utils/constants";
 import { BsHeartFill } from "react-icons/bs";
+import Footer from "../components/Footer";
+
+const HERO_IMAGE = "image/login.avif";
 
 const Login = () => {
   const handleGitHubLogin = () => {
@@ -272,28 +275,83 @@ const Login = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
-        <p className="text-2xl font-bold text-center text-gray-800">
-          Connect100xdevs
-        </p>
+    <div>
+      <div className="min-h-screen bg-[#18191b] text-[#edeef0] font-sans">
+        <section className="relative h-screen flex flex-col lg:flex-row items-center justify-center px-4 bg-gradient-to-br from-gray-800 to-gray-900">
+          <div className="lg:w-1/3 w-full h-fit max-w-md bg-[#111113] text-[#edeef0] p-8 rounded-xl shadow-2xl z-10">
+            <div className="flex items-center justify-center h-fit bg-gray-100 rounded-lg">
+              <div className="w-full max-w-md p-8 space-y-6 bg-white rounded-lg shadow-md">
+                <p className="text-2xl font-bold text-center text-gray-800">
+                  connect100<span className="text-red-600">x</span>devs
+                </p>
 
-        <div className="my-4 flex items-center justify-center">
-          <div className="border-t border-gray-300 flex-grow"></div>
-          <span className="mx-4 text-red-600">
-            <BsHeartFill />
-          </span>
-          <div className="border-t border-gray-300 flex-grow"></div>
-        </div>
+                <div className="my-4 flex items-center justify-center">
+                  <div className="border-t border-gray-300 flex-grow"></div>
+                  <span className="mx-4 text-red-600">
+                    <BsHeartFill />
+                  </span>
+                  <div className="border-t border-gray-300 flex-grow"></div>
+                </div>
 
-        <button
-          onClick={handleGitHubLogin}
-          className="w-full flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
-        >
-          <FaGithub className="w-5 h-5 mr-2" />
-          Login with GitHub
-        </button>
+                <button
+                  onClick={handleGitHubLogin}
+                  className="w-full flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-900 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800"
+                >
+                  <FaGithub className="w-5 h-5 mr-2" />
+                  Login with GitHub
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className="lg:w-2/3 w-full flex flex-col items-center justify-center text-center px-4 lg:pl-12 mt-8 lg:mt-0">
+            <h1 className="bg-gradient-to-r from-amber-400 to-red-600 bg-clip-text font-extrabold text-transparent text-center text-4xl md:text-6xl mb-4 animate-fade-in">
+              connect100xdevs
+            </h1>
+            <p className="text-lg md:text-xl mb-6 max-w-2xl animate-fade-in-delay">
+              Swipe, match, and code together. Join a community of developers
+              building the future, one connection at a time.
+            </p>
+            <p className="text-sm text-gray-400 animate-fade-in-delay-2">
+              Connect with coders worldwide. Collaborate on projects, join
+              hackathons, or grow your network.
+            </p>
+          </div>
+
+          <div
+            className="absolute inset-0 bg-cover bg-center opacity-20"
+            style={{ backgroundImage: `url('${HERO_IMAGE}')` }}
+          ></div>
+        </section>
+
+        <section className="py-20 px-4 bg-[#111113]">
+          <p className="text-4xl font-bold text-center mb-12">
+            Why
+            <span className="bg-gradient-to-r from-teal-600 to-yellow-600 bg-clip-text lg:!text-6xl md:!text-4xl sm:!text-xl font-extrabold text-transparent text-center">
+              {" "}
+              connect100xdevs?
+            </span>
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+            <div className="bg-teal-500/5 border-[rgb(38,38,38)] hover:border-teal-700 hover:bg-teal-500/10 transition-all duration-300 border p-6 rounded-lg shadow-lg hover:shadow-xl">
+              <div className="text-4xl mb-4">🚀</div>
+              <h3 className="text-xl font-bold mb-2">Match with Devs</h3>
+              <p className="text-teal-600 font-semibold">
+                Find developers with similar skills and interests to collaborate
+                on projects or share knowledge.
+              </p>
+            </div>
+            <div className="bg-yellow-500/5 border-[rgb(38,38,38)] hover:border-yellow-700 hover:bg-yellow-500/10 transition-all duration-300 border p-6 rounded-lg shadow-lg hover:shadow-xl ">
+              <div className="text-4xl mb-4">🌐</div>
+              <h3 className="text-xl font-bold mb-2">Build Your Network</h3>
+              <p className="text-yellow-600 font-semibold">
+                Grow your professional network with developers from around the
+                globe.
+              </p>
+            </div>
+          </div>
+        </section>
       </div>
+      <Footer />
     </div>
   );
 };

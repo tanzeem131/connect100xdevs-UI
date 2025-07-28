@@ -42,7 +42,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="navbar bg-black border-b-2 border-purple-800 sm:px-0 md:px-4 lg:px-6">
+    <div className="navbar bg-black border-b-2 border-purple-800/50 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
         <Link to="/" className="text-3xl text-white font-extrabold">
           connect100<span className="text-red-600">x</span>devs
