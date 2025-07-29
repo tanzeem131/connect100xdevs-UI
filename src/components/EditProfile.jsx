@@ -88,12 +88,10 @@ const EditProfile = ({ user }) => {
   const [error, setError] = useState("");
   const [selectedSkills, setSelectedSkills] = useState([]);
 
-  const handleSkillToggle = (skill) => {
-    if (selectedSkills.includes(skill)) {
-      setSelectedSkills(selectedSkills.filter((s) => s !== skill));
-    } else {
-      setSelectedSkills([...selectedSkills, skill]);
-    }
+  const handleSkillToggle = (e) => {
+    const options = Array.from(e.target.selectedOptions);
+    const values = options.map((opt) => opt.value);
+    setSelectedSkills(values);
   };
 
   const dispatch = useDispatch();
@@ -205,31 +203,35 @@ const EditProfile = ({ user }) => {
                   <div className="label">
                     <span className="label-text">Skills:</span>
                   </div>
-
-                  {/* <div className="flex flex-wrap gap-2">
-                    {availableSkills.map((skill) => (
-                      <div
-                        key={skill}
-                        onClick={() => handleSkillToggle(skill)}
-                        className={`cursor-pointer px-3 py-1 text-sm rounded-md ${
-                          skills.includes(skill)
-                            ? "bg-green-500 text-white"
-                            : "bg-[#24292e]"
-                        }`}
-                      >
+                  <select
+                    id="skills"
+                    name="skills"
+                    multiple
+                    value={selectedSkills}
+                    onChange={handleSkillToggle}
+                    className="bg-[#24292e] text-[#C59F60] rounded-md focus:outline-none p-4"
+                  >
+                    {availableSkills.map((skill, index) => (
+                      <option key={index} value={skill}>
                         {skill}
-                      </div>
+                      </option>
                     ))}
-                  </div> */}
+                  </select>
+                  <input
+                    type="text"
+                    value={age}
+                    className="input rounded-lg input-bordered w-full max-w-xs bg-black"
+                    onChange={(e) => setAge(e.target.value)}
+                  />
 
-                  <textarea
+                  {/* <textarea
                     type="text"
                     value={skills}
                     minLength={0}
                     maxLength={100}
                     className="input rounded-lg input-bordered text-wrap max-w-xs bg-black"
                     onChange={(e) => setSkills(e.target.value)}
-                  />
+                  /> */}
                 </label>
                 <label className="form-control flex flex-wrap text-wrap max-w-xs my-1">
                   <div className="label">

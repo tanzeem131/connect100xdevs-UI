@@ -86,6 +86,9 @@ const NavBar = () => {
               <li>
                 <Link to="/">Feed</Link>
               </li>
+              <li className="bg-orange-600 text-black font-semibold">
+                <Link to={`/portfolio/${user.githubUsername}`}>PORTFOLIO</Link>
+              </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
               </li>
