@@ -85,9 +85,14 @@ const UserCard = ({ user }) => {
             </p>
             <div className="flex flex-wrap gap-2">
               <div className="flex flex-wrap gap-2">
-                <span className="px-2 py-[2px] bg-[#2a0f3a] text-purple-300 text-[12px] rounded-full border border-purple-600 border-opacity-50 shadow-inner transition-transform duration-200 hover:scale-105">
-                  {skills}
-                </span>
+                {skills?.map((skill, index) => (
+                  <span
+                    key={skill}
+                    className="px-2 py-[2px] bg-[#2a0f3a] text-purple-300 text-[12px] rounded-full border border-purple-600 border-opacity-50 shadow-inner transition-transform duration-200 hover:scale-105"
+                  >
+                    {skill}
+                  </span>
+                ))}
               </div>
             </div>
           </div>
