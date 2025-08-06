@@ -98,14 +98,14 @@ const userData = {
       company: "Innovate Inc.",
       period: "2021 - Present",
       description:
-        "Leading development of a new AI-powered analytics platform.",
+        "Reduced API latency by 40% for the main dashboard, improving user experience. Increased user engagement by 15% by implementing a new real-time search feature. Mentored 3 junior developers, improving team productivity and code quality.",
     },
     {
       role: "Software Engineer",
       company: "Tech Solutions LLC",
       period: "2019 - 2021",
       description:
-        "Developed and maintained scalable microservices for a fintech application.",
+        "Reduced API latency by 40% for the main dashboard, improving user experience. Increased user engagement by 15% by implementing a new real-time search feature. Mentored 3 junior developers, improving team productivity and code quality.",
     },
     {
       role: "Junior Developer",
@@ -124,9 +124,11 @@ const userData = {
     { title: "A Deep Dive into React Hooks", platform: "Hashnode", url: "#" },
   ],
   keyAchievements: [
-    "Reduced API latency by 40% for the main dashboard, improving user experience.",
-    "Increased user engagement by 15% by implementing a new real-time search feature.",
-    "Mentored 3 junior developers, improving team productivity and code quality.",
+    "Secured 1st place in the Smart India Hackathon 2024 for our project on sustainable tech.",
+    "Achieved a global rank of 150 (Knight) in LeetCode Weekly Contest 395.",
+    "Contributed a major feature to a popular open-source library with over 10k stars on GitHub.",
+    "Published a technical article on Medium that was featured in the 'Towards Data Science' publication.",
+    "Won 'Best UI/UX Design' at the DevsForDevs Hackathon 2023.",
   ],
   currentlyExploring: ["Rust", "WebAssembly", "Advanced AI Models"],
 };

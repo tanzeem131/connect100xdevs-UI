@@ -11,6 +11,7 @@ import Chat from "./pages/Chat";
 import AboutUsPage from "./pages/About";
 import ReviewPage from "./pages/Review";
 import Portfolio from "./pages/Portfolio";
+import CreatePortfolio from "./pages/CreatePortfolio";
 
 function App() {
   return (
@@ -27,10 +28,7 @@ function App() {
               <Route path="/about" element={<AboutUsPage />} />
               <Route path="/reviews" element={<ReviewPage />} />
               <Route path="/chat/:targetUserId" element={<Chat />} />
-              <Route
-                path="/portfolio/:githubUsername"
-                element={<Portfolio />}
-              />
+              <Route path="/portfolio" element={<CreatePortfolio />} />
             </Route>
           </Routes>
         </BrowserRouter>

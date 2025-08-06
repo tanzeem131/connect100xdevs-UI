@@ -184,9 +184,6 @@ const EditProfile = ({ user }) => {
   const [showSkill, setShowSkill] = useState(false);
   const [about, setAbout] = useState(user.about || "");
   const [error, setError] = useState("");
-  const [selectedSkills, setSelectedSkills] = useState([]);
-
-  console.log("skills", skills);
 
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
