@@ -44,14 +44,15 @@ export default function CreatePortfolio() {
   const getPortfolioDetails = async () => {
     try {
       if (!userData?.githubUsername) return;
-
       const res = await axios.get(
         BASE_URL + `/portfolio/${userData?.githubUsername}`
       );
       const data = res?.data?.portfolio;
-      setFormData(data);
+      if (data) {
+        setFormData(data);
+      }
     } catch (err) {
-      setError("An unexpected error occurred");
+      console.error("An unexpected error occurred");
     }
   };
 
