@@ -16,7 +16,7 @@ import {
 } from "react-icons/fa";
 import { FcPicture } from "react-icons/fc";
 import { useSelector } from "react-redux";
-
+import { TextInputError } from "../components/TextInput";
 import { FormSection } from "../components/Portfolio/formSection";
 import { Input } from "../components/Portfolio/Input";
 import { Textarea } from "../components/Portfolio/Textarea";
@@ -40,6 +40,24 @@ export default function CreatePortfolio() {
       { title: "", description: "", tech: [], codelink: "", livelink: "" },
     ],
   });
+
+  const getPortfolioDetails = async () => {
+    try {
+      if (!userData?.githubUsername) return;
+
+      const res = await axios.get(
+        BASE_URL + `/portfolio/${userData?.githubUsername}`
+      );
+      const data = res?.data?.portfolio;
+      setFormData(data);
+    } catch (err) {
+      setError("An unexpected error occurred");
+    }
+  };
+
+  useEffect(() => {
+    getPortfolioDetails();
+  }, [userData]);
 
   useEffect(() => {
     if (userData) {
@@ -93,13 +111,11 @@ export default function CreatePortfolio() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Submitting Portfolio Data:", formData);
     try {
       const res = await axios.post(BASE_URL + "/portfolio/save", formData, {
         withCredentials: true,
       });
     } catch (err) {
-      console.log(err);
       setError("An unexpected error occurred");
     }
   };
@@ -424,6 +440,7 @@ export default function CreatePortfolio() {
           </FormSection>
 
           <div className="pt-6">
+            {error && <TextInputError text={error} />}
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-violet-600 to-sky-600 hover:from-violet-700 hover:to-sky-700 text-white font-bold py-3 px-6 rounded-lg text-lg transition-all transform hover:scale-105"

@@ -10,7 +10,7 @@ export const TextInputHeading = ({ text }) => {
 
 export const TextInputError = ({ text }) => {
   return (
-    <div className="flex justify-center mt-10 text-purple-600 text-xl">
+    <div className="flex justify-center mt-5 text-purple-600 text-xl">
       {text}
     </div>
   );

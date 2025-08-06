@@ -210,7 +210,6 @@ const EditProfile = ({ user }) => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      console.log(err);
       setError(err?.name || "An unexpected error occurred");
     }
   };
