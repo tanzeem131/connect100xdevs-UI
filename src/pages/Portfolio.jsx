@@ -20,123 +20,7 @@ import { SiLeetcode } from "react-icons/si";
 import { LuBrainCircuit } from "react-icons/lu";
 import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-
-// Enhanced Dummy Data
-const userData = {
-  name: "Tanzeem",
-  title: "Full Stack Engineer & AI Enthusiast",
-  avatarUrl: "https://avatars.githubusercontent.com/u/82838052?v=4",
-  location: "Bangalore, India",
-  email: "dev.tanzeem@gmail.com",
-  workStatus: "Open to New Opportunities",
-  socials: {
-    github: "tanzeem131",
-    twitter: "Tanzeem_Dev",
-    linkedin: "mr-tanzeem",
-    leetcode: "Tanzeem_01",
-  },
-  bio: "I am a problem solver working as a fullstack developer.",
-  githubStats: {
-    followers: 1234,
-    public_repos: 58,
-    total_stars: 456,
-  },
-  pinnedRepos: [
-    {
-      name: "Project-Alpha",
-      description:
-        "A cutting-edge data visualization tool using D3.js and React.",
-      stars: 150,
-      forks: 30,
-      language: "JavaScript",
-      languageColor: "#f1e05a",
-      url: "#",
-    },
-    {
-      name: "Connect100x-API",
-      description: "A robust REST API for the developer community platform.",
-      stars: 95,
-      forks: 12,
-      language: "TypeScript",
-      languageColor: "#3178c6",
-      url: "#",
-    },
-    {
-      name: "dotfiles",
-      description: "My personal development environment configurations.",
-      stars: 210,
-      forks: 55,
-      language: "Shell",
-      languageColor: "#89e051",
-      url: "#",
-    },
-  ],
-  projects: [
-    {
-      title: "Project Alpha",
-      description:
-        "A cutting-edge data visualization tool using D3.js and React.",
-      tech: ["React", "D3.js", "Node.js"],
-      link: "#",
-    },
-    {
-      title: "Connect100xDevs API",
-      description: "A robust REST API for the developer community platform.",
-      tech: ["Express", "MongoDB", "JWT"],
-      link: "#",
-    },
-  ],
-  techStack: [
-    "JavaScript",
-    "TypeScript",
-    "React",
-    "Node.js",
-    "Python",
-    "Docker",
-    "AWS",
-    "TailwindCSS",
-  ],
-
-  experience: [
-    {
-      role: "Senior Software Engineer",
-      company: "Innovate Inc.",
-      period: "2021 - Present",
-      description:
-        "Reduced API latency by 40% for the main dashboard, improving user experience. Increased user engagement by 15% by implementing a new real-time search feature. Mentored 3 junior developers, improving team productivity and code quality.",
-    },
-    {
-      role: "Software Engineer",
-      company: "Tech Solutions LLC",
-      period: "2019 - 2021",
-      description:
-        "Reduced API latency by 40% for the main dashboard, improving user experience. Increased user engagement by 15% by implementing a new real-time search feature. Mentored 3 junior developers, improving team productivity and code quality.",
-    },
-    {
-      role: "Junior Developer",
-      company: "CodeCrafters",
-      period: "2018 - 2019",
-      description:
-        "Assisted in building responsive user interfaces for e-commerce clients.",
-    },
-  ],
-  latestArticles: [
-    {
-      title: "Demystifying Serverless Architecture",
-      platform: "Dev.to",
-      url: "#",
-    },
-    // { title: "A Deep Dive into React Hooks", platform: "Hashnode", url: "#" },
-  ],
-  keyAchievements: [
-    "Secured 1st place in the Smart India Hackathon 2024 for our project on sustainable tech.",
-    "Achieved a global rank of 150 (Knight) in LeetCode Weekly Contest 395.",
-    "Contributed a major feature to a popular open-source library with over 10k stars on GitHub.",
-    "Published a technical article on Medium that was featured in the 'Towards Data Science' publication.",
-    "Won 'Best UI/UX Design' at the DevsForDevs Hackathon 2023.",
-  ],
-  currentlyExploring: ["Rust", "WebAssembly", "Advanced AI Models"],
-};
+import axios from "axios";
 
 const BentoCard = ({ children, className, padding = "p-6", ...props }) => (
   <motion.div
@@ -144,7 +28,7 @@ const BentoCard = ({ children, className, padding = "p-6", ...props }) => (
     whileHover={{
       scale: 1.03,
       boxShadow:
-        "0 0 40px rgba(192, 132, 252, 0.1), 0 0 80px rgba(56, 189, 248, 0.1)",
+        "0 0 10px rgba(192, 132, 252, 0.1), 0 0 20px rgba(56, 189, 248, 0.1)",
       transition: { type: "spring", stiffness: 300, damping: 15 },
     }}
     transition={{ type: "spring", stiffness: 300, damping: 20 }}
@@ -156,11 +40,11 @@ const BentoCard = ({ children, className, padding = "p-6", ...props }) => (
 
 const ExperienceTimeline = ({ experience }) => (
   <div className="flex flex-col gap-4">
-    {experience.map((item, index) => (
+    {experience?.map((item, index) => (
       <div key={index} className="flex gap-4">
         <div className="relative">
           <div className="w-3 h-3 bg-violet-500 rounded-full mt-1"></div>
-          {index < experience.length - 1 && (
+          {index < experience?.length - 1 && (
             <div className="absolute top-4 left-[5px] w-px h-full bg-neutral-700"></div>
           )}
         </div>
@@ -215,17 +99,17 @@ const GitHubStatsCard = ({ stats, padding = "p-6" }) => (
     <h2 className="text-lg font-semibold text-white mb-2">GitHub Stats</h2>
     <div className="grid grid-cols-3 gap-4 text-center">
       <div>
-        <p className="text-2xl font-bold text-violet-400">{stats.followers}</p>
+        <p className="text-2xl font-bold text-violet-400">{stats?.followers}</p>
         <p className="text-sm text-neutral-400">Followers</p>
       </div>
       <div>
-        <p className="text-2xl font-bold text-sky-400">{stats.public_repos}</p>
+        <p className="text-2xl font-bold text-sky-400">{stats?.public_repos}</p>
         <p className="text-sm text-neutral-400">Repos</p>
       </div>
-      <div>
+      {/* <div>
         <p className="text-2xl font-bold text-rose-400">{stats.total_stars}</p>
         <p className="text-sm text-neutral-400">Stars</p>
-      </div>
+      </div> */}
     </div>
   </BentoCard>
 );
@@ -262,7 +146,8 @@ const PinnedRepoCard = ({ repo }) => (
 );
 
 const InfiniteScroller = ({ skills }) => {
-  const duplicatedSkills = [...skills, ...skills];
+  const skillsArray = Array.isArray(skills) ? skills : [];
+  const duplicatedSkills = [...skillsArray, ...skillsArray];
 
   return (
     <div
@@ -273,7 +158,7 @@ const InfiniteScroller = ({ skills }) => {
       }}
     >
       <div className="flex w-max animate-scroll">
-        {duplicatedSkills.map((tech, index) => (
+        {duplicatedSkills?.map((tech, index) => (
           <span
             key={index}
             className="bg-neutral-800/50 text-neutral-300 text-sm font-medium px-4 py-2 rounded-full border border-neutral-700 hover:border-indigo-500 hover:text-indigo-300 transition-all cursor-pointer mx-2"
@@ -304,9 +189,39 @@ const Portfolio = () => {
     },
   };
 
+  const [userData, setUserData] = useState();
+  const [githubStats, setGithubStats] = useState();
+
   const { githubUsername } = useParams();
 
-  useEffect(() => {}, []);
+  const fetchedPortfolioData = async () => {
+    try {
+      const res = await axios.get(`${BASE_URL}/portfolio/${githubUsername}`);
+      const savedData = res?.data?.portfolio;
+      setUserData(savedData);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  useEffect(() => {
+    fetchedPortfolioData();
+  }, [githubUsername]);
+
+  useEffect(() => {
+    const fetchGitHubStats = async () => {
+      try {
+        const res = await axios.get(
+          BASE_URL + `/github-stats/${githubUsername}`
+        );
+        setGithubStats(res?.data);
+        console.log("GitHub Stats:", githubStats);
+      } catch (error) {
+        console.error("Error fetching GitHub stats:", error);
+      }
+    };
+
+    fetchGitHubStats();
+  }, [githubUsername]);
 
   return (
     <div className="min-h-screen w-full bg-neutral-950 text-white font-sans p-4 sm:p-6 lg:p-8 overflow-hidden">
@@ -329,8 +244,8 @@ const Portfolio = () => {
               <div className="flex flex-col sm:flex-row items-start gap-6">
                 <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
                   <motion.img
-                    src={userData.avatarUrl}
-                    alt={userData.name}
+                    src={userData?.profilepic}
+                    alt={userData?.name}
                     className="w-full h-full rounded-full object-cover border-2 border-violet-500/50"
                     whileHover={{ rotate: 360 }}
                     transition={{
@@ -342,19 +257,20 @@ const Portfolio = () => {
                 </div>
                 <div>
                   <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-sky-300 text-transparent bg-clip-text">
-                    {userData.name}
+                    {userData?.name}
                   </h1>
-                  <p className="text-sky-400 mt-1 text-lg">{userData.title}</p>
+                  <p className="text-sky-400 mt-1 text-lg">{userData?.title}</p>
                   <div className="flex items-center gap-2 mt-3 text-neutral-400">
                     <FaMapMarkerAlt size={16} />
-                    <span>{userData.location}</span>
+                    <span>{userData?.location}</span>
                   </div>
                 </div>
               </div>
               <div>
-                <p className="text-neutral-300 italic">"{userData.bio}"</p>
+                <p className="text-neutral-300 italic">"{userData?.bio}"</p>
               </div>
               <BentoCard
+                padding="p-3"
                 className="md:col-span-3 lg:col-span-4 group bg-indigo-900/50 text-indigo-300 border-indigo-700 flex-col"
                 glowColor="from-indigo-500/20"
                 variants={itemVariants}
@@ -370,7 +286,7 @@ const Portfolio = () => {
           </BentoCard>
 
           <div className="space-y-4">
-            <WorkStatusCard padding="p-2" status={userData.workStatus} />
+            <WorkStatusCard padding="p-2" status={userData?.workStatus} />
             <BentoCard
               padding="p-4"
               className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
@@ -391,22 +307,22 @@ const Portfolio = () => {
               <div className="flex justify-between">
                 <SocialLink
                   icon={FaGithub}
-                  href={`https://github.com/${userData.socials.github}`}
+                  href={`https://github.com/${userData?.socials.github}`}
                   color="text-neutral-300 group-hover:text-white"
                 />
                 <SocialLink
                   icon={FaTwitter}
-                  href={`https://x.com/${userData.socials.twitter}`}
+                  href={`https://x.com/${userData?.socials.twitter}`}
                   color="text-sky-400 group-hover:text-sky-300"
                 />
                 <SocialLink
                   icon={FaLinkedin}
-                  href={`https://linkedin.com/in/${userData.socials.linkedin}`}
+                  href={`https://linkedin.com/in/${userData?.socials.linkedin}`}
                   color="text-blue-500 group-hover:text-blue-400"
                 />
                 <SocialLink
                   icon={SiLeetcode}
-                  href={`https://leetcode.com/${userData.socials.leetcode}`}
+                  href={`https://leetcode.com/${userData?.socials.leetcode}`}
                   color="text-[#FFA116] group-hover:text-[#ffe316]"
                 />
               </div>
@@ -423,50 +339,8 @@ const Portfolio = () => {
                 className="rounded-xl"
               />
             </BentoCard>
-            <GitHubStatsCard padding="p-4" stats={userData.githubStats} />
+            <GitHubStatsCard padding="p-4" stats={githubStats} />
           </div>
-
-          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
-            <BentoCard
-              className="flex-grow group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
-              variants={itemVariants}
-            >
-              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <FaBookOpen className="text-indigo-400" /> Latest Articles
-              </h2>
-              <div className="space-y-3">
-                {userData?.latestArticles.map((article) => (
-                  <a
-                    key={article.title}
-                    href={article.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block p-3 bg-neutral-800/50 rounded-lg border border-neutral-700 hover:border-indigo-500/50 group/article"
-                  >
-                    <p className="font-semibold text-white group-hover/article:text-indigo-300">
-                      {article.title}
-                    </p>
-                    <p className="text-xs text-neutral-400">
-                      {article.platform}
-                    </p>
-                  </a>
-                ))}
-              </div>
-            </BentoCard>
-          </div>
-          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
-            <BentoCard
-              className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
-              variants={itemVariants}
-            >
-              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                <LuBrainCircuit className="text-neutral-400" /> Currently
-                Exploring
-              </h2>
-              <InfiniteScroller skills={userData?.currentlyExploring} />
-            </BentoCard>
-          </div>
-
           <BentoCard
             className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-amber-900/80 to-neutral-900"
             variants={itemVariants}
@@ -475,7 +349,7 @@ const Portfolio = () => {
               <FaMedal className="text-amber-400" /> Key Achievements
             </h2>
             <ul className="space-y-3">
-              {userData.keyAchievements.map((ach, i) => (
+              {userData?.keyAchievements?.map((ach, i) => (
                 <li
                   key={i}
                   className="flex items-start gap-2 text-sm text-neutral-300"
@@ -497,24 +371,10 @@ const Portfolio = () => {
             <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
               <FaBriefcase className="text-sky-400" /> Experience
             </h2>
-            <ExperienceTimeline experience={userData.experience} />
+            <ExperienceTimeline experience={userData?.experience} />
           </BentoCard>
 
-          <BentoCard
-            className="md:col-span-4 lg:col-span-4 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
-            variants={itemVariants}
-          >
-            <h2 className="text-xl font-semibold text-white mb-4">
-              Pinned Repositories
-            </h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {userData.pinnedRepos.map((repo) => (
-                <PinnedRepoCard key={repo.name} repo={repo} />
-              ))}
-            </div>
-          </BentoCard>
-
-          {userData.projects.map((project, index) => (
+          {userData?.projects?.map((project, index) => (
             <BentoCard
               key={index}
               className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
@@ -534,7 +394,7 @@ const Portfolio = () => {
                   {project.description}
                 </p>
                 <div className="flex flex-wrap gap-2 mb-4">
-                  {project.tech.map((tech) => (
+                  {project.tech?.map((tech) => (
                     <span
                       key={tech}
                       className="text-xs bg-gradient-to-r from-rose-900/50 to-red-900/50 text-rose-300 px-2 py-1 rounded-md border border-rose-800"
@@ -544,20 +404,87 @@ const Portfolio = () => {
                   ))}
                 </div>
               </div>
-              <a
-                href={project.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="group text-sm font-medium text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors mt-auto"
-              >
-                <span>View Project</span>
-                <FaArrowRight
-                  size={14}
-                  className="transform transition-transform group-hover:translate-x-1"
-                />
-              </a>
+              <div className="flex gap-4">
+                <a
+                  href={project.livelink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group text-sm font-medium text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors mt-auto"
+                >
+                  <span>View Project</span>
+                  <FaArrowRight
+                    size={14}
+                    className="transform transition-transform group-hover:translate-x-1"
+                  />
+                </a>
+                <a
+                  href={project.codelink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group text-sm font-medium text-rose-400 hover:text-rose-300 flex items-center gap-1 transition-colors mt-auto"
+                >
+                  <span>Code</span>
+                  <FaArrowRight
+                    size={14}
+                    className="transform transition-transform group-hover:translate-x-1"
+                  />
+                </a>
+              </div>
             </BentoCard>
           ))}
+
+          <BentoCard
+            className="md:col-span-4 lg:col-span-4 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
+            variants={itemVariants}
+          >
+            <h2 className="text-xl font-semibold text-white mb-4">
+              Pinned Repositories
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {userData?.pinnedRepos?.map((repo) => (
+                <PinnedRepoCard key={repo.name} repo={repo} />
+              ))}
+            </div>
+          </BentoCard>
+
+          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
+            <BentoCard
+              className="flex-grow group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <FaBookOpen className="text-indigo-400" /> Latest Articles
+              </h2>
+              <div className="space-y-3">
+                {userData?.articles?.map((article) => (
+                  <a
+                    key={article.title}
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-3 bg-neutral-800/50 rounded-lg border border-neutral-700 hover:border-indigo-500/50 group/article"
+                  >
+                    <p className="font-semibold text-white group-hover/article:text-indigo-300">
+                      {article.title}
+                    </p>
+                    <p className="text-xs text-neutral-400">{article.owner}</p>
+                  </a>
+                ))}
+              </div>
+            </BentoCard>
+          </div>
+          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
+            <BentoCard
+              className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <LuBrainCircuit className="text-neutral-400" /> Currently
+                Exploring
+              </h2>
+              <InfiniteScroller skills={userData?.currentlyExploring} />
+            </BentoCard>
+          </div>
 
           <BentoCard
             className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
@@ -572,7 +499,7 @@ const Portfolio = () => {
               freelance opportunities, or being part of an amazing team.
             </p>
             <a
-              href={`mailto:${userData.email}`}
+              href={`mailto:${userData?.email}`}
               className="group w-full mt-auto bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
             >
               <FaEnvelope size={20} />
