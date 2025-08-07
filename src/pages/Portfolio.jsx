@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import GitHubCalendar from "react-github-calendar";
 import {
@@ -15,7 +16,10 @@ import {
   FaCheckCircle,
   FaBookOpen,
 } from "react-icons/fa";
+import { SiLeetcode } from "react-icons/si";
 import { LuBrainCircuit } from "react-icons/lu";
+import { useParams } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 // Enhanced Dummy Data
 const userData = {
@@ -29,6 +33,7 @@ const userData = {
     github: "tanzeem131",
     twitter: "Tanzeem_Dev",
     linkedin: "mr-tanzeem",
+    leetcode: "Tanzeem_01",
   },
   bio: "I am a problem solver working as a fullstack developer.",
   githubStats: {
@@ -121,7 +126,7 @@ const userData = {
       platform: "Dev.to",
       url: "#",
     },
-    { title: "A Deep Dive into React Hooks", platform: "Hashnode", url: "#" },
+    // { title: "A Deep Dive into React Hooks", platform: "Hashnode", url: "#" },
   ],
   keyAchievements: [
     "Secured 1st place in the Smart India Hackathon 2024 for our project on sustainable tech.",
@@ -133,9 +138,9 @@ const userData = {
   currentlyExploring: ["Rust", "WebAssembly", "Advanced AI Models"],
 };
 
-const BentoCard = ({ children, className, ...props }) => (
+const BentoCard = ({ children, className, padding = "p-6", ...props }) => (
   <motion.div
-    className={`relative backdrop-blur-xl border border-neutral-700/60 rounded-2xl p-6 flex flex-col justify-between overflow-hidden ${className}`}
+    className={`relative backdrop-blur-xl border border-neutral-700/60 rounded-2xl ${padding} flex flex-col justify-between overflow-hidden ${className}`}
     whileHover={{
       scale: 1.03,
       boxShadow:
@@ -178,13 +183,13 @@ const SocialLink = ({ icon: Icon, href, text, color }) => (
     rel="noopener noreferrer"
     className="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors group"
   >
-    <Icon size={24} className={color} />
-    <span className="group-hover:underline">{text}</span>
+    <Icon size={32} className={color} />
   </a>
 );
 
-const WorkStatusCard = ({ status }) => (
+const WorkStatusCard = ({ status, padding = "p-6" }) => (
   <BentoCard
+    padding={padding}
     className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-teal-900/80 to-neutral-900"
     variants={itemVariants}
   >
@@ -201,23 +206,24 @@ const WorkStatusCard = ({ status }) => (
   </BentoCard>
 );
 
-const GitHubStatsCard = ({ stats }) => (
+const GitHubStatsCard = ({ stats, padding = "p-6" }) => (
   <BentoCard
+    padding={padding}
     className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
     variants={itemVariants}
   >
-    <h2 className="text-xl font-semibold text-white mb-4">GitHub Stats</h2>
+    <h2 className="text-lg font-semibold text-white mb-2">GitHub Stats</h2>
     <div className="grid grid-cols-3 gap-4 text-center">
       <div>
-        <p className="text-3xl font-bold text-violet-400">{stats.followers}</p>
+        <p className="text-2xl font-bold text-violet-400">{stats.followers}</p>
         <p className="text-sm text-neutral-400">Followers</p>
       </div>
       <div>
-        <p className="text-3xl font-bold text-sky-400">{stats.public_repos}</p>
+        <p className="text-2xl font-bold text-sky-400">{stats.public_repos}</p>
         <p className="text-sm text-neutral-400">Repos</p>
       </div>
       <div>
-        <p className="text-3xl font-bold text-rose-400">{stats.total_stars}</p>
+        <p className="text-2xl font-bold text-rose-400">{stats.total_stars}</p>
         <p className="text-sm text-neutral-400">Stars</p>
       </div>
     </div>
@@ -270,7 +276,7 @@ const InfiniteScroller = ({ skills }) => {
         {duplicatedSkills.map((tech, index) => (
           <span
             key={index}
-            className="bg-neutral-800/80 text-neutral-300 text-sm font-medium px-4 py-2 rounded-full border border-neutral-700 hover:border-indigo-500 hover:text-indigo-300 transition-all cursor-pointer mx-2"
+            className="bg-neutral-800/50 text-neutral-300 text-sm font-medium px-4 py-2 rounded-full border border-neutral-700 hover:border-indigo-500 hover:text-indigo-300 transition-all cursor-pointer mx-2"
           >
             {tech}
           </span>
@@ -298,6 +304,10 @@ const Portfolio = () => {
     },
   };
 
+  const { githubUsername } = useParams();
+
+  useEffect(() => {}, []);
+
   return (
     <div className="min-h-screen w-full bg-neutral-950 text-white font-sans p-4 sm:p-6 lg:p-8 overflow-hidden">
       <div className="absolute inset-0 -z-10 h-full w-full bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:14px_24px]"></div>
@@ -315,64 +325,108 @@ const Portfolio = () => {
             className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-violet-900/80 to-neutral-900"
             variants={itemVariants}
           >
-            <div className="flex flex-col sm:flex-row items-start gap-6">
-              <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
-                <motion.img
-                  src={userData.avatarUrl}
-                  alt={userData.name}
-                  className="w-full h-full rounded-full object-cover border-2 border-violet-500/50"
-                  whileHover={{ rotate: 360 }}
-                  transition={{
-                    duration: 10,
-                    repeat: Infinity,
-                    ease: "linear",
-                  }}
-                />
-                <div className="absolute bottom-1 right-1 w-4 h-4 bg-green-400 rounded-full border-2 border-neutral-900 ring-2 ring-green-400/50 animate-pulse"></div>
-              </div>
-              <div>
-                <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-sky-300 text-transparent bg-clip-text">
-                  {userData.name}
-                </h1>
-                <p className="text-sky-400 mt-1 text-lg">{userData.title}</p>
-                <div className="flex items-center gap-2 mt-3 text-neutral-400">
-                  <FaMapMarkerAlt size={16} />
-                  <span>{userData.location}</span>
+            <div className="flex flex-col justify-between h-full">
+              <div className="flex flex-col sm:flex-row items-start gap-6">
+                <div className="relative w-24 h-24 sm:w-28 sm:h-28 flex-shrink-0">
+                  <motion.img
+                    src={userData.avatarUrl}
+                    alt={userData.name}
+                    className="w-full h-full rounded-full object-cover border-2 border-violet-500/50"
+                    whileHover={{ rotate: 360 }}
+                    transition={{
+                      duration: 10,
+                      repeat: Infinity,
+                      ease: "linear",
+                    }}
+                  />
+                </div>
+                <div>
+                  <h1 className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-violet-300 to-sky-300 text-transparent bg-clip-text">
+                    {userData.name}
+                  </h1>
+                  <p className="text-sky-400 mt-1 text-lg">{userData.title}</p>
+                  <div className="flex items-center gap-2 mt-3 text-neutral-400">
+                    <FaMapMarkerAlt size={16} />
+                    <span>{userData.location}</span>
+                  </div>
                 </div>
               </div>
-            </div>
-            <div className="my-3">
-              <p className="text-neutral-300 italic">"{userData.bio}"</p>
-            </div>
-            <BentoCard
-              className="md:col-span-3 lg:col-span-4 group bg-gradient-to-br from-indigo-900/80 to-neutral-900 flex-col"
-              glowColor="from-indigo-500/20"
-              variants={itemVariants}
-            >
-              <h2 className="text-xl font-semibold text-white mb-4">
-                My Tech Stack
-              </h2>
-              <div className="flex-grow flex items-center justify-center">
-                <InfiniteScroller skills={userData.techStack} />
+              <div>
+                <p className="text-neutral-300 italic">"{userData.bio}"</p>
               </div>
-            </BentoCard>
+              <BentoCard
+                className="md:col-span-3 lg:col-span-4 group bg-indigo-900/50 text-indigo-300 border-indigo-700 flex-col"
+                glowColor="from-indigo-500/20"
+                variants={itemVariants}
+              >
+                <h2 className="text-xl font-semibold text-white mb-4">
+                  My Tech Stack
+                </h2>
+                <div className="flex-grow flex items-center justify-center">
+                  <InfiniteScroller skills={userData?.techStack} />
+                </div>
+              </BentoCard>
+            </div>
           </BentoCard>
 
           <div className="space-y-4">
-            <WorkStatusCard status={userData.workStatus} />
-
+            <WorkStatusCard padding="p-2" status={userData.workStatus} />
             <BentoCard
+              padding="p-4"
               className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
               variants={itemVariants}
             >
-              <h2 className="text-xl font-semibold text-white mb-1">
-                Coding Activity
+              <h2 className="text-lg font-semibold text-white mb-2">
+                Github Contributions
               </h2>
               <GitHubCalendar username="tanzeem131" />
             </BentoCard>
           </div>
+          <div className="space-y-4">
+            <BentoCard
+              padding="p-5"
+              className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-sky-900/80 to-neutral-900"
+              variants={itemVariants}
+            >
+              <div className="flex justify-between">
+                <SocialLink
+                  icon={FaGithub}
+                  href={`https://github.com/${userData.socials.github}`}
+                  color="text-neutral-300 group-hover:text-white"
+                />
+                <SocialLink
+                  icon={FaTwitter}
+                  href={`https://x.com/${userData.socials.twitter}`}
+                  color="text-sky-400 group-hover:text-sky-300"
+                />
+                <SocialLink
+                  icon={FaLinkedin}
+                  href={`https://linkedin.com/in/${userData.socials.linkedin}`}
+                  color="text-blue-500 group-hover:text-blue-400"
+                />
+                <SocialLink
+                  icon={SiLeetcode}
+                  href={`https://leetcode.com/${userData.socials.leetcode}`}
+                  color="text-[#FFA116] group-hover:text-[#ffe316]"
+                />
+              </div>
+            </BentoCard>
 
-          <div className="md:col-span-4 lg:col-span-1 flex flex-col gap-4">
+            <BentoCard
+              padding="p-1"
+              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
+              variants={itemVariants}
+            >
+              <img
+                src={`https://leetcard.jacoblin.cool/Tanzeem_01`}
+                alt="LeetCode Stats"
+                className="rounded-xl"
+              />
+            </BentoCard>
+            <GitHubStatsCard padding="p-4" stats={userData.githubStats} />
+          </div>
+
+          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
             <BentoCard
               className="flex-grow group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
               variants={itemVariants}
@@ -381,7 +435,7 @@ const Portfolio = () => {
                 <FaBookOpen className="text-indigo-400" /> Latest Articles
               </h2>
               <div className="space-y-3">
-                {userData.latestArticles.map((article) => (
+                {userData?.latestArticles.map((article) => (
                   <a
                     key={article.title}
                     href={article.url}
@@ -399,6 +453,8 @@ const Portfolio = () => {
                 ))}
               </div>
             </BentoCard>
+          </div>
+          <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
             <BentoCard
               className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
               variants={itemVariants}
@@ -407,74 +463,9 @@ const Portfolio = () => {
                 <LuBrainCircuit className="text-neutral-400" /> Currently
                 Exploring
               </h2>
-              <div className="flex flex-wrap gap-2">
-                {userData.currentlyExploring.map((tech) => (
-                  <span
-                    key={tech}
-                    className="bg-neutral-800 text-neutral-300 text-sm font-medium px-3 py-1 rounded-full border border-neutral-700"
-                  >
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <InfiniteScroller skills={userData?.currentlyExploring} />
             </BentoCard>
           </div>
-
-          <GitHubStatsCard stats={userData.githubStats} />
-
-          <BentoCard
-            className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-sky-900/80 to-neutral-900"
-            variants={itemVariants}
-          >
-            <h2 className="text-xl font-semibold text-white mb-4">
-              Connect with me
-            </h2>
-            <div className="space-y-4">
-              <SocialLink
-                icon={FaGithub}
-                href={`https://github.com/${userData.socials.github}`}
-                text={userData.socials.github}
-                color="text-neutral-300 group-hover:text-white"
-              />
-              <SocialLink
-                icon={FaTwitter}
-                href={`https://x.com/${userData.socials.twitter}`}
-                text={userData.socials.twitter}
-                color="text-sky-400 group-hover:text-sky-300"
-              />
-              <SocialLink
-                icon={FaLinkedin}
-                href={`https://linkedin.com/in/${userData.socials.linkedin}`}
-                text={userData.socials.linkedin}
-                color="text-blue-500 group-hover:text-blue-400"
-              />
-            </div>
-          </BentoCard>
-
-          <BentoCard
-            className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
-            glowColor="from-emerald-500/20"
-            variants={itemVariants}
-          >
-            <h2 className="text-xl font-semibold text-white mb-4">
-              Get in Touch
-            </h2>
-            <p className="text-neutral-400 mb-4">
-              I'm always open to discussing new projects, creative ideas or
-              opportunities to be part of an amazing team.
-            </p>
-            <a
-              href={`mailto:${userData.email}`}
-              className="group w-full mt-auto bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
-            >
-              <FaEnvelope size={20} />
-              <span>Email me</span>
-              <FaArrowRight
-                size={20}
-                className="transform transition-transform group-hover:translate-x-1"
-              />
-            </a>
-          </BentoCard>
 
           <BentoCard
             className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-amber-900/80 to-neutral-900"
@@ -567,6 +558,31 @@ const Portfolio = () => {
               </a>
             </BentoCard>
           ))}
+
+          <BentoCard
+            className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
+            glowColor="from-emerald-500/20"
+            variants={itemVariants}
+          >
+            <h2 className="text-xl font-semibold text-white mb-4">
+              Get in Touch
+            </h2>
+            <p className="text-neutral-400 mb-4">
+              I'm always open to discussing new projects, creative ideas,
+              freelance opportunities, or being part of an amazing team.
+            </p>
+            <a
+              href={`mailto:${userData.email}`}
+              className="group w-full mt-auto bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
+            >
+              <FaEnvelope size={20} />
+              <span>Email me</span>
+              <FaArrowRight
+                size={20}
+                className="transform transition-transform group-hover:translate-x-1"
+              />
+            </a>
+          </BentoCard>
         </motion.div>
       </div>
     </div>
