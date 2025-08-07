@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL, demoPortfolioLink } from "../utils/constants";
 import { useState, useEffect } from "react";
 import {
   FaUser,
@@ -17,13 +17,15 @@ import {
 import { FcPicture } from "react-icons/fc";
 import { useSelector } from "react-redux";
 import { TextInputError } from "../components/TextInput";
-import { FormSection } from "../components/Portfolio/formSection";
+import { FormSection } from "../components/Portfolio/FormSection";
 import { Input } from "../components/Portfolio/Input";
 import { Textarea } from "../components/Portfolio/Textarea";
 import { SharePortfolio } from "../components/Portfolio/SharePorfolio";
 import { AnimatePresence } from "framer-motion";
 import Modal from "../components/Modal";
 import { SiLeetcode } from "react-icons/si";
+import { CreatePortfolioButton } from "../components/Portfolio/Button";
+import { Link } from "react-router-dom";
 
 export default function CreatePortfolio() {
   const userData = useSelector((store) => store.user);
@@ -171,7 +173,7 @@ export default function CreatePortfolio() {
     <>
       <div className="min-h-screen w-full bg-neutral-950 text-white font-sans p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-12">
+          <header className="text-center mb-4">
             <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-400 to-sky-400 text-transparent bg-clip-text">
               Create Your Portfolio
             </h1>
@@ -180,7 +182,11 @@ export default function CreatePortfolio() {
               portfolio.
             </p>
           </header>
-
+          <div className="flex justify-center mb-4">
+            <Link to={demoPortfolioLink}>
+              <CreatePortfolioButton text={"See a live portfolio"} />
+            </Link>
+          </div>
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* --- Personal Details--- */}
             <FormSection title="Personal Details" icon={FaUser}>

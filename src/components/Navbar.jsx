@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { clearFeed } from "../utils/feedSlice";
+import { CreatePortfolioButton } from "./Portfolio/Button";
 
 const NavBar = () => {
   const user = useSelector((store) => store.user);
@@ -48,7 +49,7 @@ const NavBar = () => {
           connect100<span className="text-red-600">x</span>devs
         </Link>
       </div>
-      {user && (
+      {user ? (
         <div className="flex-none gap-2">
           <div className="form-control text-purple-600 sm:text-sm text-xs">
             Welcome,{" "}
@@ -100,6 +101,10 @@ const NavBar = () => {
             </ul>
           </div>
         </div>
+      ) : (
+        <Link to={"/login"}>
+          <CreatePortfolioButton text={"Create Your Portfolio"} />
+        </Link>
       )}
     </div>
   );

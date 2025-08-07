@@ -19,13 +19,11 @@ function App() {
       <Provider store={appStore}>
         <BrowserRouter basename="/">
           <Routes>
+            <Route path="/portfolio/:githubUsername" element={<Portfolio />} />
+
             <Route path="/" element={<Body />}>
               <Route path="/" element={<Feed />} />
               <Route path="/login" element={<Login />} />
-              <Route
-                path="/portfolio/:githubUsername"
-                element={<Portfolio />}
-              />
               <Route path="/profile" element={<Profile />} />
               <Route path="/connections" element={<Connections />} />
               <Route path="/requests" element={<Requests />} />
