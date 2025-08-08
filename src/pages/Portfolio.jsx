@@ -301,7 +301,7 @@ const Portfolio = () => {
                 <h2 className="text-lg font-semibold text-white mb-2">
                   Github Contributions
                 </h2>
-                <GitHubCalendar username="tanzeem131" />
+                <GitHubCalendar username={userData?.socials.github} />
               </BentoCard>
             </div>
             <div className="space-y-4">
