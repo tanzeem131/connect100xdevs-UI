@@ -1,10 +1,15 @@
 import { FaBroadcastTower } from "react-icons/fa";
 
-export const WorkStatusCard = ({ status, padding = "p-6" }) => (
-  <BentoCard
+export const WorkStatusCard = ({
+  status,
+  CardComponent,
+  variants,
+  padding = "p-6",
+}) => (
+  <CardComponent
     padding={padding}
     className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-teal-900/80 to-neutral-900"
-    variants={itemVariants}
+    variants={variants}
   >
     <div className="flex items-center gap-4">
       <div className="relative">
@@ -16,5 +21,5 @@ export const WorkStatusCard = ({ status, padding = "p-6" }) => (
         <p className="text-teal-300">{status}</p>
       </div>
     </div>
-  </BentoCard>
+  </CardComponent>
 );

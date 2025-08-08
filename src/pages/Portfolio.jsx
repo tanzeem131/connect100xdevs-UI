@@ -147,7 +147,12 @@ const Portfolio = () => {
             </BentoCard>
 
             <div className="space-y-4">
-              <WorkStatusCard padding="p-2" status={userData?.workStatus} />
+              <WorkStatusCard
+                padding="p-2"
+                CardComponent={BentoCard}
+                variants={itemVariants}
+                status={userData?.workStatus}
+              />
               <BentoCard
                 padding="p-4"
                 className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
@@ -200,7 +205,12 @@ const Portfolio = () => {
                   className="rounded-xl"
                 />
               </BentoCard>
-              <GitHubStatsCard padding="p-4" stats={githubStats} />
+              <GitHubStatsCard
+                padding="p-4"
+                CardComponent={BentoCard}
+                variants={itemVariants}
+                stats={githubStats}
+              />
             </div>
             <BentoCard
               className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-amber-900/80 to-neutral-900"

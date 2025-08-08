@@ -1,8 +1,13 @@
-export const GitHubStatsCard = ({ stats, padding = "p-6" }) => (
-  <BentoCard
+export const GitHubStatsCard = ({
+  stats,
+  CardComponent,
+  variants,
+  padding = "p-6",
+}) => (
+  <CardComponent
     padding={padding}
     className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
-    variants={itemVariants}
+    variants={variants}
   >
     <h2 className="text-lg font-semibold text-white mb-2">GitHub Stats</h2>
     <div className="grid grid-cols-3 gap-4 text-center">
@@ -19,5 +24,5 @@ export const GitHubStatsCard = ({ stats, padding = "p-6" }) => (
         <p className="text-sm text-neutral-400">Stars</p>
       </div> */}
     </div>
-  </BentoCard>
+  </CardComponent>
 );
