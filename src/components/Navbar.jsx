@@ -102,7 +102,7 @@ const NavBar = () => {
           </div>
         </div>
       ) : (
-        <Link to={"/login"}>
+        <Link to={"/portfolio"}>
           <CreatePortfolioButton text={"Create Your Portfolio"} />
         </Link>
       )}

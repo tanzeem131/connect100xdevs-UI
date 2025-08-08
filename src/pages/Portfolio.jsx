@@ -9,9 +9,6 @@ import {
   FaMapMarkerAlt,
   FaArrowRight,
   FaBriefcase,
-  FaStar,
-  FaCodeBranch,
-  FaBroadcastTower,
   FaMedal,
   FaCheckCircle,
   FaBookOpen,
@@ -22,155 +19,13 @@ import { useParams } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import NavBar from "../components/Navbar";
-
-const BentoCard = ({ children, className, padding = "p-6", ...props }) => (
-  <motion.div
-    className={`relative backdrop-blur-xl border border-neutral-700/60 rounded-2xl ${padding} flex flex-col justify-between overflow-hidden ${className}`}
-    whileHover={{
-      scale: 1.03,
-      boxShadow:
-        "0 0 10px rgba(192, 132, 252, 0.1), 0 0 20px rgba(56, 189, 248, 0.1)",
-      transition: { type: "spring", stiffness: 300, damping: 15 },
-    }}
-    transition={{ type: "spring", stiffness: 300, damping: 20 }}
-    {...props}
-  >
-    <div className="relative z-10 h-full flex flex-col">{children}</div>
-  </motion.div>
-);
-
-const ExperienceTimeline = ({ experience }) => (
-  <div className="flex flex-col gap-4">
-    {experience?.map((item, index) => (
-      <div key={index} className="flex gap-4">
-        <div className="relative">
-          <div className="w-3 h-3 bg-violet-500 rounded-full mt-1"></div>
-          {index < experience?.length - 1 && (
-            <div className="absolute top-4 left-[5px] w-px h-full bg-neutral-700"></div>
-          )}
-        </div>
-        <div>
-          <p className="font-semibold text-white">
-            {item.role} @ {item.company}
-          </p>
-          <p className="text-xs text-neutral-400 mb-1">{item.period}</p>
-          <p className="text-sm text-neutral-300">{item.description}</p>
-        </div>
-      </div>
-    ))}
-  </div>
-);
-
-const SocialLink = ({ icon: Icon, href, text, color }) => (
-  <a
-    href={href}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="flex items-center gap-3 text-neutral-300 hover:text-white transition-colors group"
-  >
-    <Icon size={32} className={color} />
-  </a>
-);
-
-const WorkStatusCard = ({ status, padding = "p-6" }) => (
-  <BentoCard
-    padding={padding}
-    className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-teal-900/80 to-neutral-900"
-    variants={itemVariants}
-  >
-    <div className="flex items-center gap-4">
-      <div className="relative">
-        <FaBroadcastTower size={32} className="text-teal-400" />
-        <div className="absolute -top-1 -right-1 w-3 h-3 bg-teal-400 rounded-full animate-ping"></div>
-      </div>
-      <div>
-        <h2 className="text-xl font-semibold text-white">Status</h2>
-        <p className="text-teal-300">{status}</p>
-      </div>
-    </div>
-  </BentoCard>
-);
-
-const GitHubStatsCard = ({ stats, padding = "p-6" }) => (
-  <BentoCard
-    padding={padding}
-    className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
-    variants={itemVariants}
-  >
-    <h2 className="text-lg font-semibold text-white mb-2">GitHub Stats</h2>
-    <div className="grid grid-cols-3 gap-4 text-center">
-      <div>
-        <p className="text-2xl font-bold text-violet-400">{stats?.followers}</p>
-        <p className="text-sm text-neutral-400">Followers</p>
-      </div>
-      <div>
-        <p className="text-2xl font-bold text-sky-400">{stats?.public_repos}</p>
-        <p className="text-sm text-neutral-400">Repos</p>
-      </div>
-      {/* <div>
-        <p className="text-2xl font-bold text-rose-400">{stats.total_stars}</p>
-        <p className="text-sm text-neutral-400">Stars</p>
-      </div> */}
-    </div>
-  </BentoCard>
-);
-
-const PinnedRepoCard = ({ repo }) => (
-  <a
-    href={repo.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    className="block p-4 bg-neutral-800/50 rounded-lg border border-neutral-700 hover:border-violet-500/50 transition-colors group"
-  >
-    <h3 className="font-semibold text-white group-hover:text-violet-300 flex items-center gap-2">
-      <FaBriefcase size={16} /> {repo.name}
-    </h3>
-    <p className="text-sm text-neutral-400 mt-1 mb-3">{repo.description}</p>
-    <div className="flex items-center gap-4 text-xs text-neutral-400">
-      <div className="flex items-center gap-1">
-        <span
-          className="w-3 h-3 rounded-full"
-          style={{ backgroundColor: repo.languageColor }}
-        ></span>
-        <span>{repo.language}</span>
-      </div>
-      <div className="flex items-center gap-1">
-        <FaStar size={14} />
-        <span>{repo.stars}</span>
-      </div>
-      <div className="flex items-center gap-1">
-        <FaCodeBranch size={14} />
-        <span>{repo.forks}</span>
-      </div>
-    </div>
-  </a>
-);
-
-const InfiniteScroller = ({ skills }) => {
-  const skillsArray = Array.isArray(skills) ? skills : [];
-  const duplicatedSkills = [...skillsArray, ...skillsArray];
-
-  return (
-    <div
-      className="w-full overflow-hidden relative"
-      style={{
-        maskImage:
-          "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
-      }}
-    >
-      <div className="flex w-max animate-scroll">
-        {duplicatedSkills?.map((tech, index) => (
-          <span
-            key={index}
-            className="bg-neutral-800/50 text-neutral-300 text-sm font-medium px-4 py-2 rounded-full border border-neutral-700 hover:border-indigo-500 hover:text-indigo-300 transition-all cursor-pointer mx-2"
-          >
-            {tech}
-          </span>
-        ))}
-      </div>
-    </div>
-  );
-};
+import { BentoCard } from "../components/Portfolio/BentoCard";
+import { ExperienceTimeline } from "../components/Portfolio/ExperienceTimeline";
+import { SocialLink } from "../components/Portfolio/SocialLink";
+import { WorkStatusCard } from "../components/Portfolio/WorkStatusCard";
+import { GitHubStatsCard } from "../components/Portfolio/GitHubStatsCard";
+import { PinnedRepoCard } from "../components/Portfolio/PinnedRepoCard";
+import { InfiniteScroller } from "../components/Portfolio/InfiniteScroller";
 
 const itemVariants = {
   hidden: { y: 20, opacity: 0 },
@@ -340,7 +195,7 @@ const Portfolio = () => {
                 variants={itemVariants}
               >
                 <img
-                  src={`https://leetcard.jacoblin.cool/Tanzeem_01`}
+                  src={`https://leetcard.jacoblin.cool/${userData?.socials.leetcode}`}
                   alt="LeetCode Stats"
                   className="rounded-xl"
                 />
