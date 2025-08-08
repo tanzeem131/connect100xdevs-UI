@@ -298,7 +298,7 @@ export default function CreatePortfolio() {
                 onChange={(e) =>
                   setFormData((prev) => ({
                     ...prev,
-                    techStack: e.target.value.split(",").map((s) => s.trim()),
+                    techStack: e.target.value?.split(",")?.map((s) => s.trim()),
                   }))
                 }
                 placeholder="React, Node.js, Python..."
@@ -331,8 +331,8 @@ export default function CreatePortfolio() {
                   setFormData((prev) => ({
                     ...prev,
                     currentlyExploring: e.target.value
-                      .split(",")
-                      .map((s) => s.trim()),
+                      ?.split(",")
+                      ?.map((s) => s.trim()),
                   }))
                 }
                 placeholder="React, Node.js, Python..."
@@ -492,8 +492,8 @@ export default function CreatePortfolio() {
                     onChange={(e) => {
                       const list = [...formData?.projects];
                       list[index].tech = e.target.value
-                        .split(",")
-                        .map((s) => s.trim());
+                        ?.split(",")
+                        ?.map((s) => s.trim());
                       setFormData((prev) => ({ ...prev, projects: list }));
                     }}
                     placeholder="React, Firebase, TailwindCSS"

@@ -24,7 +24,7 @@ const Connections = () => {
     <div className="mt-5 min-h-screen">
       <TextInputHeading text={"Connections"} />
 
-      {connections.map((connection) => {
+      {connections?.map((connection) => {
         const {
           _id,
           firstName,

@@ -64,7 +64,7 @@ const Chat = () => {
       withCredentials: true,
     });
     setMessages(
-      getChats.data.message.map((msg) => {
+      getChats?.data?.message?.map((msg) => {
         const { senderId, text, createdAt } = msg;
         return {
           senderId,
@@ -94,7 +94,7 @@ const Chat = () => {
         </div>
       </div>
       <div className="flex-1 overflow-y-auto hide-scrollbar p-4 space-y-4 chat-background-pattern">
-        {messages.map((msg, index) => (
+        {messages?.map((msg, index) => (
           <div
             key={index}
             className={`flex ${

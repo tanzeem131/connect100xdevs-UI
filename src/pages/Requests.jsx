@@ -60,7 +60,7 @@ const Requests = () => {
     <div className="text-center mt-5 min-h-screen">
       <TextInputHeading text={"Requests"} />
 
-      {requests.map((request) => {
+      {requests?.map((request) => {
         const {
           _id,
           firstName,
