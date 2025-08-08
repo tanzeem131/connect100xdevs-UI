@@ -45,7 +45,7 @@ const NavBar = () => {
   return (
     <div className="navbar bg-black border-b-2 border-purple-800/50 sm:px-0 md:px-4 lg:px-6">
       <div className="flex-1">
-        <Link to="/" className="text-3xl text-white font-extrabold">
+        <Link to="/" className="sm:text-3xl text-2xl text-white font-extrabold">
           connect100<span className="text-red-600">x</span>devs
         </Link>
       </div>
@@ -89,6 +89,9 @@ const NavBar = () => {
               </li>
               <li className="bg-orange-600 text-black font-semibold">
                 <Link to={`/portfolio`}>PORTFOLIO</Link>
+              </li>
+              <li className="bg-teal-600 text-white font-semibold">
+                <Link to={`/resume`}>RESUME</Link>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>

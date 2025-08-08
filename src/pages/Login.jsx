@@ -348,6 +348,27 @@ const Login = () => {
                 globe.
               </p>
             </div>
+            <div className="bg-purple-500/5 border-[rgb(38,38,38)] hover:border-purple-700 hover:bg-purple-500/10 transition-all duration-300 border p-6 rounded-lg shadow-lg hover:shadow-xl">
+              <div className="text-4xl mb-4">🎨</div>
+              <h3 className="text-xl font-bold mb-2">
+                Create Your Own Portfolio
+              </h3>
+              <p className="text-purple-600 font-semibold">
+                Showcase your projects and skills with a personalized portfolio
+                that stands out to recruiters.
+              </p>
+            </div>
+
+            <div className="bg-sky-500/5 border-[rgb(38,38,38)] hover:border-sky-700 hover:bg-sky-500/10 transition-all duration-300 border p-6 rounded-lg shadow-lg hover:shadow-xl">
+              <div className="text-4xl mb-4">📄</div>
+              <h3 className="text-xl font-bold mb-2">
+                Create Your ATS-Friendly Resume
+              </h3>
+              <p className="text-sky-600 font-semibold">
+                Build a professional resume optimized to pass through Applicant
+                Tracking Systems.
+              </p>
+            </div>
           </div>
         </section>
       </div>

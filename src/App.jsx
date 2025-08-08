@@ -12,6 +12,7 @@ import AboutUsPage from "./pages/About";
 import ReviewPage from "./pages/Review";
 import Portfolio from "./pages/Portfolio";
 import CreatePortfolio from "./pages/CreatePortfolio";
+import Resume from "./pages/Resume";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
               <Route path="/reviews" element={<ReviewPage />} />
               <Route path="/chat/:targetUserId" element={<Chat />} />
               <Route path="/portfolio" element={<CreatePortfolio />} />
+              <Route path="/resume" element={<Resume />} />
             </Route>
           </Routes>
         </BrowserRouter>
