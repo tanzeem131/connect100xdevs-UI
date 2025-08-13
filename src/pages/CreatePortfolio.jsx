@@ -26,9 +26,11 @@ import Modal from "../components/Modal";
 import { SiLeetcode } from "react-icons/si";
 import { CreatePortfolioButton } from "../components/Portfolio/Button";
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export default function CreatePortfolio() {
   const userData = useSelector((store) => store.user);
+  const navigate = useNavigate();
   const [savedSlug, setSavedSlug] = useState(null);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -58,7 +60,7 @@ export default function CreatePortfolio() {
   useEffect(() => {
     const loadInitialData = async () => {
       if (!userData?.githubUsername) {
-        return;
+        return navigate("/login");
       }
 
       try {
