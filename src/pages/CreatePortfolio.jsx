@@ -27,6 +27,7 @@ import { SiLeetcode } from "react-icons/si";
 import { CreatePortfolioButton } from "../components/Portfolio/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
+import PdfReader from "../components/Portfolio/Pdf";
 
 export default function CreatePortfolio() {
   const userData = useSelector((store) => store.user);
@@ -184,10 +185,11 @@ export default function CreatePortfolio() {
               portfolio.
             </p>
           </header>
-          <div className="flex justify-center mb-4">
+          <div className="flex justify-center gap-4 mb-4">
             <Link to={demoPortfolioLink}>
               <CreatePortfolioButton text={"See a live portfolio"} />
             </Link>
+            <PdfReader />
           </div>
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* --- Personal Details--- */}
