@@ -5,7 +5,7 @@ import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 
 // pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
-pdfjsLib.GlobalWorkerOptions.workerSrc = "/pdf.worker.min.mjs";
+pdfjsLib.GlobalWorkerOptions.workerSrc = `${window.location.origin}/pdf.worker.min.mjs`;
 
 function PdfReader({ setFormData }) {
   const [loading, setLoading] = useState(false);
