@@ -1,11 +1,13 @@
 import { useState } from "react";
 import * as pdfjsLib from "pdfjs-dist";
-import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
+// import pdfjsWorker from "pdfjs-dist/build/pdf.worker.min.mjs?url";
 import axios from "axios";
 import { BASE_URL } from "../../utils/constants";
 
-pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
+// pdfjsLib.GlobalWorkerOptions.workerSrc = pdfjsWorker;
 // pdfjsLib.GlobalWorkerOptions.workerSrc = `${window.location.origin}/pdf.worker.min.mjs`;
+pdfjsLib.GlobalWorkerOptions.workerSrc =
+  "https://unpkg.com/pdfjs-dist@5.4.54/build/pdf.worker.min.mjs";
 
 function PdfReader({ setFormData }) {
   const [loading, setLoading] = useState(false);
