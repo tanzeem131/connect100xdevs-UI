@@ -10,7 +10,10 @@ export const InfiniteScroller = ({ skills }) => {
           "linear-gradient(to right, transparent, white 20%, white 80%, transparent)",
       }}
     >
-      <div className="flex w-max animate-scroll">
+      <div
+        className="flex w-max animate-scroll"
+        style={{ animationDuration: "5s" }}
+      >
         {duplicatedSkills?.map((tech, index) => (
           <span
             key={index}

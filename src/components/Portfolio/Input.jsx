@@ -6,6 +6,7 @@ export const Input = ({
   placeholder,
   icon: Icon,
   required = false,
+  readOnly = false,
 }) => (
   <div>
     <label
@@ -26,6 +27,7 @@ export const Input = ({
         onChange={onChange}
         placeholder={placeholder}
         required={required}
+        readOnly={readOnly}
         className="w-full bg-neutral-900 border border-neutral-700 rounded-lg py-2 pl-10 pr-4 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 focus:outline-none transition-all"
       />
     </div>

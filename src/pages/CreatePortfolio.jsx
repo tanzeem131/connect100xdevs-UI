@@ -35,20 +35,20 @@ export default function CreatePortfolio() {
   const [savedSlug, setSavedSlug] = useState(null);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
-    name: `${userData?.firstName || ""} ${userData?.lastName || ""}`.trim(),
+    name: "",
     title: "",
     location: "",
-    email: userData?.emailId,
-    profilepic: userData?.photoUrl,
-    bio: userData?.about,
+    email: "",
+    profilepic: "",
+    bio: "",
     workStatus: "Open to New Opportunities",
     socials: {
-      github: userData?.githubUsername,
+      github: "",
       twitter: "",
       linkedin: "",
       leetcode: "",
     },
-    techStack: userData?.skills,
+    techStack: [],
     currentlyExploring: [],
     experience: [{ role: "", company: "", period: "", description: "" }],
     keyAchievements: [""],
@@ -60,7 +60,11 @@ export default function CreatePortfolio() {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      if (!userData?.githubUsername) {
+      if (userData === null) {
+        return;
+      }
+
+      if (!userData || !userData.githubUsername) {
         return navigate("/login");
       }
 
@@ -158,6 +162,12 @@ export default function CreatePortfolio() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    console.log("userData:", userData);
+    console.log("userData.githubUsername:", userData?.githubUsername);
+    console.log("formData.socials.github:", formData.socials.github);
+    console.log("Full formData being sent:", formData);
+
     setError("");
     setSavedSlug(null);
     try {
@@ -189,7 +199,7 @@ export default function CreatePortfolio() {
             <Link to={demoPortfolioLink}>
               <CreatePortfolioButton text={"See a live portfolio"} />
             </Link>
-            <PdfReader />
+            <PdfReader setFormData={setFormData} />
           </div>
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* --- Personal Details--- */}
@@ -224,12 +234,13 @@ export default function CreatePortfolio() {
                 />
                 <Input
                   label="Contact Email"
-                  name="email"
+                  name="emailId"
                   value={formData?.email}
                   onChange={handleInputChange}
                   placeholder="you@example.com"
                   icon={FaEnvelope}
                   required
+                  readOnly
                 />
                 <Input
                   label="Profile Picture URL"
@@ -239,14 +250,16 @@ export default function CreatePortfolio() {
                   placeholder="Profile Picture URL"
                   icon={FcPicture}
                   required
+                  readOnly
                 />
               </div>
-              <Textarea
+              <Input
                 label="Bio / Quote"
                 name="bio"
                 value={formData?.bio}
                 onChange={handleInputChange}
                 placeholder="A short, catchy bio or your favorite quote..."
+                icon={FaBriefcase}
                 required
               />
             </FormSection>
@@ -262,6 +275,7 @@ export default function CreatePortfolio() {
                   placeholder="john-doe"
                   icon={FaGithub}
                   required
+                  readOnly
                 />
                 <Input
                   label="Twitter Handle"
@@ -510,6 +524,7 @@ export default function CreatePortfolio() {
                     onChange={(e) => handleListChange(index, e, "projects")}
                     placeholder="https://github.com/user/repo"
                     icon={FaLink}
+                    required
                   />
                   <Input
                     label="Project Live Link"
@@ -518,6 +533,7 @@ export default function CreatePortfolio() {
                     onChange={(e) => handleListChange(index, e, "projects")}
                     placeholder="https://connect100xdevs.xyz"
                     icon={FaLink}
+                    required
                   />
                   <button
                     type="button"

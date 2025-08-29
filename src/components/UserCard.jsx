@@ -49,7 +49,7 @@ const UserCard = ({ user }) => {
           <h2 className="text-3xl font-extrabold text-white drop-shadow-xl tracking-wide">
             {firstName} {lastName}
           </h2>
-          {githubUsername && (
+          {/* {githubUsername && (
             <a
               href={`https://github.com/${githubUsername}`}
               className="flex items-center gap-2 bg-gray-700/70 backdrop-blur-sm text-gray-200 px-1 py-1 rounded-full text-[12px] font-semibold hover:bg-gray-600 hover:text-white transition-colors duration-200 shadow-md border border-gray-600"
@@ -57,7 +57,7 @@ const UserCard = ({ user }) => {
               <FaGithub className="text-xl" />
               <span>{githubUsername}</span>
             </a>
-          )}
+          )} */}
         </div>
       </div>
 

@@ -34,7 +34,23 @@ export const Card = ({
             </p>
           )}
           {skills && (
-            <p className="font-medium text-lg text-gray-300 mb-1">{skills}</p>
+            <div className="space-y-1">
+              <p className="text-[12px] uppercase text-gray-400 font-bold tracking-widest border-b border-gray-700 pb-0">
+                Skills
+              </p>
+              <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2">
+                  {skills?.map((skill, index) => (
+                    <span
+                      key={skill}
+                      className="px-2 py-[2px] bg-[#2a0f3a] text-purple-300 text-[12px] rounded-full border border-purple-600 border-opacity-50 shadow-inner transition-transform duration-200 hover:scale-105"
+                    >
+                      {skill}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
           )}
           {(age || gender) && (
             <p className="text-md text-gray-400 mb-2">

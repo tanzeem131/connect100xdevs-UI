@@ -84,7 +84,7 @@ const Requests = () => {
               gender={gender}
               skills={skills}
               about={about}
-              githubUsername={githubUsername}
+              // githubUsername={githubUsername}
               actions={"request"}
               onClickAccept={() => reviewRequest("accepted", request._id)}
               onClickReject={() => reviewRequest("rejected", request._id)}
