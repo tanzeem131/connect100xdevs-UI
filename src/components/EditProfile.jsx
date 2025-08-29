@@ -184,6 +184,7 @@ const EditProfile = ({ user }) => {
   const [showSkill, setShowSkill] = useState(false);
   const [about, setAbout] = useState(user.about || "");
   const [error, setError] = useState("");
+  const [isRateLimited, setIsRateLimited] = useState(false);
 
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
@@ -394,11 +395,22 @@ const EditProfile = ({ user }) => {
               </div>
               <p className="text-red-500">{error}</p>
               <div className="card-actions justify-center m-1">
-                <button
+                {/* <button
                   className="p-3 text-black bg-[#39D353] rounded-md"
                   onClick={saveProfile}
                 >
                   Save Profile
+                </button> */}
+                <button
+                  className={`p-3 rounded-md ${
+                    isRateLimited
+                      ? "bg-gray-500 text-gray-300 cursor-not-allowed"
+                      : "text-black bg-[#39D353]"
+                  }`}
+                  onClick={saveProfile}
+                  disabled={isRateLimited}
+                >
+                  {isRateLimited ? "Rate Limited" : "Save Profile"}
                 </button>
               </div>
             </div>
