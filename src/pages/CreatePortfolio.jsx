@@ -186,7 +186,7 @@ export default function CreatePortfolio() {
     <>
       <div className="min-h-screen w-full bg-neutral-950 text-white font-sans p-4 sm:p-6 lg:p-8">
         <div className="max-w-4xl mx-auto">
-          <header className="text-center mb-4">
+          {/* <header className="text-center mb-4">
             <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-400 to-sky-400 text-transparent bg-clip-text">
               Create Your Portfolio
             </h1>
@@ -200,7 +200,35 @@ export default function CreatePortfolio() {
               <CreatePortfolioButton text={"See a live portfolio"} />
             </Link>
             <PdfReader setFormData={setFormData} />
+          </div> */}
+
+          <header className="text-center mb-6">
+            <h1 className="text-4xl sm:text-5xl font-bold bg-gradient-to-r from-violet-400 to-sky-400 text-transparent bg-clip-text">
+              Create Your Portfolio
+            </h1>
+            <p className="text-neutral-400 mt-2">
+              Fill out the details below to generate your stunning bento grid
+              portfolio.
+            </p>
+          </header>
+
+          <div className="flex justify-center gap-4 mb-6">
+            <Link to={demoPortfolioLink}>
+              <CreatePortfolioButton text={"See a live portfolio"} />
+            </Link>
           </div>
+
+          <div className="max-w-lg mx-auto bg-neutral-900 border border-neutral-700 rounded-2xl shadow-lg p-6 text-center">
+            <h2 className="text-xl font-semibold text-white mb-2">
+              Create your portfolio in seconds
+            </h2>
+            <p className="text-neutral-400 mb-4">
+              Just upload your resume to autofill your details.
+            </p>
+
+            <PdfReader setFormData={setFormData} />
+          </div>
+
           <form onSubmit={handleSubmit} className="space-y-8">
             {/* --- Personal Details--- */}
             <FormSection title="Personal Details" icon={FaUser}>
