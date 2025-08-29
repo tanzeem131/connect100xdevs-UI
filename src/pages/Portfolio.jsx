@@ -303,21 +303,21 @@ const Portfolio = () => {
               </BentoCard>
             ))}
 
-            {userData.pinnedRepos && (
-              <BentoCard
-                className="md:col-span-4 lg:col-span-4 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
-                variants={itemVariants}
-              >
-                <h2 className="text-xl font-semibold text-white mb-4">
-                  Pinned Repositories
-                </h2>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                  {userData?.pinnedRepos?.map((repo) => (
-                    <PinnedRepoCard key={repo.name} repo={repo} />
-                  ))}
-                </div>
-              </BentoCard>
-            )}
+            {/* {userData?.pinnedRepos && ( */}
+            <BentoCard
+              className="md:col-span-4 lg:col-span-4 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4">
+                Pinned Repositories
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {userData?.pinnedRepos?.map((repo) => (
+                  <PinnedRepoCard key={repo.name} repo={repo} />
+                ))}
+              </div>
+            </BentoCard>
+            {/* )} */}
 
             <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">
               <BentoCard
