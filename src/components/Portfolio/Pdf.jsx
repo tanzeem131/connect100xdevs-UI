@@ -56,6 +56,7 @@ function PdfReader({ setFormData }) {
   //     setLoading(false);
   //   }
   // };
+
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -68,7 +69,6 @@ function PdfReader({ setFormData }) {
 
       reader.onload = async (e) => {
         const typedarray = new Uint8Array(e.target.result);
-
         const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
         let fullText = "";
 
@@ -85,8 +85,32 @@ function PdfReader({ setFormData }) {
           });
           setFormData(res.data);
         } catch (apiErr) {
-          console.error("Backend parsing error:", apiErr);
-          setError("Failed to parse resume with AI.");
+          if (apiErr.response?.status === 429) {
+            const rateLimitData = apiErr.response.data;
+            const retryAfter = rateLimitData.retryAfter; // Timestamp from backend
+            const now = Math.floor(Date.now() / 1000); // Current time in seconds
+
+            // Calculate remaining time in minutes
+            const minutesLeft = Math.ceil((retryAfter - now) / 60);
+
+            if (minutesLeft > 0) {
+              setError(
+                `${rateLimitData.message} Please try again in ${minutesLeft} minute(s).`
+              );
+            } else {
+              setError(
+                rateLimitData.message ||
+                  "Too many requests. Please try again shortly."
+              );
+            }
+          } else {
+            setError(
+              apiErr.response?.data?.message ||
+                apiErr.response?.data?.error ||
+                apiErr.message ||
+                "Failed to parse resume with AI."
+            );
+          }
         } finally {
           setLoading(false);
         }
