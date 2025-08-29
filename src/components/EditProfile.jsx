@@ -188,8 +188,35 @@ const EditProfile = ({ user }) => {
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false);
 
+  // const saveProfile = async () => {
+  //   setError("");
+  //   try {
+  //     const res = await axios.patch(
+  //       BASE_URL + "/profile/edit",
+  //       {
+  //         firstName,
+  //         lastName,
+  //         photoUrl,
+  //         age,
+  //         gender,
+  //         skills,
+  //         about,
+  //       },
+  //       { withCredentials: true }
+  //     );
+  //     dispatch(addUser(res?.data?.data));
+  //     setShowToast(true);
+  //     setTimeout(() => {
+  //       setShowToast(false);
+  //     }, 3000);
+  //   } catch (err) {
+  //     setError(err?.name || "An unexpected error occurred");
+  //   }
+  // };
   const saveProfile = async () => {
     setError("");
+    setIsRateLimited(false);
+
     try {
       const res = await axios.patch(
         BASE_URL + "/profile/edit",
@@ -210,7 +237,24 @@ const EditProfile = ({ user }) => {
         setShowToast(false);
       }, 3000);
     } catch (err) {
-      setError(err?.name || "An unexpected error occurred");
+      if (err.response?.status === 429) {
+        const rateLimitData = err.response.data;
+        setIsRateLimited(true);
+
+        // Use the retryAfter timestamp from backend
+        const retryAfter = rateLimitData.retryAfter;
+        const now = Math.floor(Date.now() / 1000);
+        const minutesLeft = Math.ceil((retryAfter - now) / 60);
+
+        setError(`${rateLimitData.message} (${minutesLeft} minutes remaining)`);
+      } else {
+        setError(
+          err.response?.data?.message ||
+            err.response?.data?.error ||
+            err.message ||
+            "An unexpected error occurred"
+        );
+      }
     }
   };
 

@@ -160,16 +160,28 @@ export default function CreatePortfolio() {
     setFormData((prev) => ({ ...prev, [listName]: list }));
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+
+  //   setError("");
+  //   setSavedSlug(null);
+  //   try {
+  //     const res = await axios.post(BASE_URL + "/portfolio/save", formData, {
+  //       withCredentials: true,
+  //     });
+  //     if (res?.data && res?.data?.portfolio) {
+  //       setSavedSlug(res?.data?.portfolio?.slug);
+  //     }
+  //   } catch (err) {
+  //     setError("An unexpected error occurred");
+  //   }
+  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log("userData:", userData);
-    console.log("userData.githubUsername:", userData?.githubUsername);
-    console.log("formData.socials.github:", formData.socials.github);
-    console.log("Full formData being sent:", formData);
-
     setError("");
     setSavedSlug(null);
+
     try {
       const res = await axios.post(BASE_URL + "/portfolio/save", formData, {
         withCredentials: true,
@@ -178,7 +190,33 @@ export default function CreatePortfolio() {
         setSavedSlug(res?.data?.portfolio?.slug);
       }
     } catch (err) {
-      setError("An unexpected error occurred");
+      if (err.response?.status === 429) {
+        const rateLimitData = err.response.data;
+        const retryAfter = rateLimitData.retryAfter; // Timestamp from backend
+        const now = Math.floor(Date.now() / 1000); // Current time in seconds
+
+        // Calculate remaining time in minutes
+        const minutesLeft = Math.ceil((retryAfter - now) / 60);
+
+        // Set a descriptive error message
+        if (minutesLeft > 0) {
+          setError(
+            `${rateLimitData.message} Please try again in ${minutesLeft} minute(s).`
+          );
+        } else {
+          setError(
+            rateLimitData.message ||
+              "Too many requests. Please try again shortly."
+          );
+        }
+      } else {
+        setError(
+          err.response?.data?.message ||
+            err.response?.data?.error ||
+            err.message ||
+            "An unexpected error occurred"
+        );
+      }
     }
   };
 
