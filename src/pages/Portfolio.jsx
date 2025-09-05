@@ -319,73 +319,71 @@ const Portfolio = () => {
             </BentoCard> */}
             {/* )} */}
 
-            <div className="md:col-span-2 lg:col-span-2 flex flex-col gap-4">
-              <BentoCard
-                className="flex-grow group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
-                variants={itemVariants}
-              >
-                <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <FaBookOpen className="text-indigo-400" /> Latest Articles
-                </h2>
-                <div className="space-y-3">
-                  {userData?.articles?.map((article) => (
-                    <a
-                      key={article.title}
-                      href={article.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="block p-3 bg-neutral-800/50 rounded-lg border border-neutral-700 hover:border-indigo-500/50 group/article"
-                    >
-                      <p className="font-semibold text-white group-hover/article:text-indigo-300">
-                        {article.title}
-                      </p>
-                      <p className="text-xs text-neutral-400">
-                        {article.owner}
-                      </p>
-                    </a>
-                  ))}
-                </div>
-              </BentoCard>
-            </div>
-            <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-4">
-              <BentoCard
-                className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
-                variants={itemVariants}
-              >
-                <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
-                  <LuBrainCircuit className="text-neutral-400" /> Currently
-                  Exploring
-                </h2>
-                <InfiniteScroller skills={userData?.currentlyExploring} />
-              </BentoCard>
-            </div>
+            {/* <div className="md:col-span-2 lg:col-span-2 flex flex-col gap-4"> */}
+            <BentoCard
+              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <FaBookOpen className="text-indigo-400" /> Latest Articles
+              </h2>
+              <div className="space-y-3">
+                {userData?.articles?.map((article) => (
+                  <a
+                    key={article.title}
+                    href={article.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block p-3 bg-neutral-800/50 rounded-lg border border-neutral-700 hover:border-indigo-500/50 group/article"
+                  >
+                    <p className="font-semibold text-white group-hover/article:text-indigo-300">
+                      {article.title}
+                    </p>
+                    <p className="text-xs text-neutral-400">{article.owner}</p>
+                  </a>
+                ))}
+              </div>
+            </BentoCard>
+            {/* </div> */}
+            {/* <div className="md:col-span-1 lg:col-span-2 flex flex-col gap-4"> */}
+            <BentoCard
+              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
+                <LuBrainCircuit className="text-neutral-400" /> Currently
+                Exploring
+              </h2>
+              <InfiniteScroller skills={userData?.currentlyExploring} />
+            </BentoCard>
+            {/* </div> */}
 
-            <div className="md:col-span-1 lg:col-span-1 flex flex-col gap-4">
-              <BentoCard
-                className="group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
-                glowColor="from-emerald-500/20"
-                variants={itemVariants}
+            {/* <div className="md:col-span-1 lg:col-span-1 flex flex-col gap-4"> */}
+            <BentoCard
+              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
+              glowColor="from-emerald-500/20"
+              variants={itemVariants}
+            >
+              <h2 className="text-xl font-semibold text-white mb-4">
+                Get in Touch
+              </h2>
+              <p className="text-neutral-400 mb-4">
+                I'm always open to discussing new projects, creative ideas,
+                freelance opportunities, or being part of an amazing team.
+              </p>
+              <a
+                href={`mailto:${userData?.email}`}
+                className="group w-full mt-auto bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
               >
-                <h2 className="text-xl font-semibold text-white mb-4">
-                  Get in Touch
-                </h2>
-                <p className="text-neutral-400 mb-4">
-                  I'm always open to discussing new projects, creative ideas,
-                  freelance opportunities, or being part of an amazing team.
-                </p>
-                <a
-                  href={`mailto:${userData?.email}`}
-                  className="group w-full mt-auto bg-gradient-to-r from-emerald-600 to-green-600 hover:from-emerald-700 hover:to-green-700 text-white font-semibold py-3 px-4 rounded-lg flex items-center justify-center gap-2 transition-all duration-300"
-                >
-                  <FaEnvelope size={20} />
-                  <span>Email me</span>
-                  <FaArrowRight
-                    size={20}
-                    className="transform transition-transform group-hover:translate-x-1"
-                  />
-                </a>
-              </BentoCard>
-            </div>
+                <FaEnvelope size={20} />
+                <span>Email me</span>
+                <FaArrowRight
+                  size={20}
+                  className="transform transition-transform group-hover:translate-x-1"
+                />
+              </a>
+            </BentoCard>
+            {/* </div> */}
 
             {/* <BentoCard
               className="md:col-span-1 lg:col-span-1 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
