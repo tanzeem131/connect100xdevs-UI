@@ -304,7 +304,7 @@ const Portfolio = () => {
             ))}
 
             {/* {userData?.pinnedRepos && ( */}
-            <BentoCard
+            {/* <BentoCard
               className="md:col-span-4 lg:col-span-4 group bg-gradient-to-br from-rose-900/80 to-neutral-900"
               variants={itemVariants}
             >
@@ -316,7 +316,7 @@ const Portfolio = () => {
                   <PinnedRepoCard key={repo.name} repo={repo} />
                 ))}
               </div>
-            </BentoCard>
+            </BentoCard> */}
             {/* )} */}
 
             <div className="md:col-span-4 lg:col-span-2 flex flex-col gap-4">

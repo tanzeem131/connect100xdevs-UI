@@ -7,7 +7,9 @@ const Resume = () => {
         <h1 className="text-4xl sm:text-5xl font-extrabold text-purple-400 mb-4">
           Resume builder Coming Soon!
         </h1>
-        <p className="text-lg text-gray-300">We're working hard. Stay tuned!</p>
+        <p className="text-lg text-gray-300">
+          Build your resume in seconds based on the job description.
+        </p>
       </div>
     </div>
   );

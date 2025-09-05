@@ -27,7 +27,7 @@ export const Card = ({
             src={photoUrl}
           />
         </div>
-        <div className="flex-grow text-center sm:text-left">
+        <div className="flex-grow text-center sm:text-left max-w-96">
           {(firstName || lastName) && (
             <p className="font-extrabold text-2xl tracking-wide text-purple-400 mb-1">
               {firstName} {lastName}
