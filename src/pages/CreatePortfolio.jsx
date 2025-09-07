@@ -61,7 +61,7 @@ export default function CreatePortfolio() {
   useEffect(() => {
     const loadInitialData = async () => {
       if (userData === null) {
-        return;
+        return navigate("/login");
       }
 
       if (!userData || !userData.githubUsername) {
