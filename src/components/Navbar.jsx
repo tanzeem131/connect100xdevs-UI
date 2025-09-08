@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import { removeUser } from "../utils/userSlice";
 import { clearFeed } from "../utils/feedSlice";
+import ReactGA from "react-ga4";
 import { CreatePortfolioButton } from "./Portfolio/Button";
 
 const NavBar = () => {
@@ -40,6 +41,14 @@ const NavBar = () => {
     } catch (err) {
       console.error(err);
     }
+  };
+
+  const handleCreatePortfolioClick = () => {
+    ReactGA.event({
+      category: "Portfolio",
+      action: "Create Portfolio Button Clicked",
+      label: "Navbar Create Portfolio Button CTA",
+    });
   };
 
   return (
@@ -88,7 +97,9 @@ const NavBar = () => {
                 <Link to="/">Feed</Link>
               </li>
               <li className="bg-orange-600 text-black font-semibold">
-                <Link to={`/portfolio`}>PORTFOLIO</Link>
+                <Link to={`/portfolio`} onClick={handleCreatePortfolioClick}>
+                  PORTFOLIO
+                </Link>
               </li>
               <li className="bg-teal-600 text-white font-semibold">
                 <Link to={`/resume`}>RESUME</Link>
@@ -105,7 +116,7 @@ const NavBar = () => {
           </div>
         </div>
       ) : (
-        <Link to={"/portfolio"}>
+        <Link to={"/portfolio"} onClick={handleCreatePortfolioClick}>
           <CreatePortfolioButton text={"Create Your Portfolio"} />
         </Link>
       )}

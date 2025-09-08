@@ -13,12 +13,14 @@ import ReviewPage from "./pages/Review";
 import Portfolio from "./pages/Portfolio";
 import CreatePortfolio from "./pages/CreatePortfolio";
 import Resume from "./pages/Resume";
+import GoogleAnalytics from "./components/GoogleAnalytics";
 
 function App() {
   return (
     <>
       <Provider store={appStore}>
         <BrowserRouter basename="/">
+          <GoogleAnalytics />
           <Routes>
             <Route path="/portfolio/:githubUsername" element={<Portfolio />} />
 
