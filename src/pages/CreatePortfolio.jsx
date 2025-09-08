@@ -28,9 +28,11 @@ import { CreatePortfolioButton } from "../components/Portfolio/Button";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import PdfReader from "../components/Portfolio/Pdf";
+import { Loader } from "../components/Loader";
 
 export default function CreatePortfolio() {
   const userData = useSelector((store) => store.user);
+  const [data, setData] = useState(null);
   const navigate = useNavigate();
   const [savedSlug, setSavedSlug] = useState(null);
   const [error, setError] = useState("");
@@ -60,13 +62,13 @@ export default function CreatePortfolio() {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      if (userData === null) {
-        return navigate("/login");
-      }
+      //    if (userData === null) {
+      //   return navigate("/login");
+      // }
 
-      if (!userData || !userData.githubUsername) {
-        return navigate("/login");
-      }
+      // if (!userData || !userData.githubUsername) {
+      //   return navigate("/login");
+      // }
 
       try {
         const res = await axios.get(
@@ -160,22 +162,6 @@ export default function CreatePortfolio() {
     setFormData((prev) => ({ ...prev, [listName]: list }));
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-
-  //   setError("");
-  //   setSavedSlug(null);
-  //   try {
-  //     const res = await axios.post(BASE_URL + "/portfolio/save", formData, {
-  //       withCredentials: true,
-  //     });
-  //     if (res?.data && res?.data?.portfolio) {
-  //       setSavedSlug(res?.data?.portfolio?.slug);
-  //     }
-  //   } catch (err) {
-  //     setError("An unexpected error occurred");
-  //   }
-  // };
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -192,13 +178,11 @@ export default function CreatePortfolio() {
     } catch (err) {
       if (err.response?.status === 429) {
         const rateLimitData = err.response.data;
-        const retryAfter = rateLimitData.retryAfter; // Timestamp from backend
-        const now = Math.floor(Date.now() / 1000); // Current time in seconds
+        const retryAfter = rateLimitData.retryAfter;
+        const now = Math.floor(Date.now() / 1000);
 
-        // Calculate remaining time in minutes
         const minutesLeft = Math.ceil((retryAfter - now) / 60);
 
-        // Set a descriptive error message
         if (minutesLeft > 0) {
           setError(
             `${rateLimitData.message} Please try again in ${minutesLeft} minute(s).`
@@ -219,6 +203,14 @@ export default function CreatePortfolio() {
       }
     }
   };
+
+  if (!userData) {
+    return (
+      <div className="flex justify-center align-middle items-center h-screen">
+        <Loader />
+      </div>
+    );
+  }
 
   return (
     <>
