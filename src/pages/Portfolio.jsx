@@ -321,7 +321,7 @@ const Portfolio = () => {
 
             {/* <div className="md:col-span-2 lg:col-span-2 flex flex-col gap-4"> */}
             <BentoCard
-              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
+              className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-indigo-900/80 to-neutral-900"
               variants={itemVariants}
             >
               <h2 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
@@ -360,7 +360,7 @@ const Portfolio = () => {
 
             {/* <div className="md:col-span-1 lg:col-span-1 flex flex-col gap-4"> */}
             <BentoCard
-              className="md:col-span-2 lg:col-span-2 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
+              className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-emerald-900/80 to-neutral-900"
               glowColor="from-emerald-500/20"
               variants={itemVariants}
             >
