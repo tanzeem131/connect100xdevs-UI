@@ -52,7 +52,7 @@ const Footer = () => {
         <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-12 lg:gap-20">
           <div className="flex flex-col items-center text-center">
             <div className="max-w-sm">
-              <h2 className="text-3xl font-serif text-[#FF8C42] mb-6 italic">
+              <h2 className="text-3xl font-serif text-amber-700 mb-6 italic">
                 Get Features Details!
               </h2>
               <div className="mb-6">
@@ -66,7 +66,7 @@ const Footer = () => {
               </div>
               <button
                 onClick={handleEnquiry}
-                className="px-8 py-3 border-2 border-orange-600/20 rounded-full text-orange-700 hover:bg-gray-100 transition-colors duration-300"
+                className="px-8 py-3 border-2 border-orange-600/20 hover:border-orange-600 rounded-full text-amber-700 hover:text-orange-600 transition-colors duration-300"
               >
                 Contact us
               </button>
