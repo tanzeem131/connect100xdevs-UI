@@ -116,7 +116,10 @@ const NavBar = () => {
           </div>
         </div>
       ) : (
-        <Link to={"/portfolio"} onClick={handleCreatePortfolioClick}>
+        <Link
+          to={user ? "/portfolio" : "/login"}
+          onClick={handleCreatePortfolioClick}
+        >
           <CreatePortfolioButton text={"Create Your Portfolio"} />
         </Link>
       )}

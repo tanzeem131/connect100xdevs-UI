@@ -26,14 +26,11 @@ import Modal from "../components/Modal";
 import { SiLeetcode } from "react-icons/si";
 import { CreatePortfolioButton } from "../components/Portfolio/Button";
 import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
 import PdfReader from "../components/Portfolio/Pdf";
 import { Loader } from "../components/Loader";
 
 export default function CreatePortfolio() {
   const userData = useSelector((store) => store.user);
-  const [data, setData] = useState(null);
-  const navigate = useNavigate();
   const [savedSlug, setSavedSlug] = useState(null);
   const [error, setError] = useState("");
   const [formData, setFormData] = useState({
@@ -62,14 +59,6 @@ export default function CreatePortfolio() {
 
   useEffect(() => {
     const loadInitialData = async () => {
-      //    if (userData === null) {
-      //   return navigate("/login");
-      // }
-
-      // if (!userData || !userData.githubUsername) {
-      //   return navigate("/login");
-      // }
-
       try {
         const res = await axios.get(
           `${BASE_URL}/portfolio/${userData?.githubUsername}`

@@ -47,6 +47,7 @@ const Portfolio = () => {
 
   const [userData, setUserData] = useState();
   const [githubStats, setGithubStats] = useState();
+  const [dataLoaded, setDataLoaded] = useState(false);
 
   const { githubUsername } = useParams();
 
@@ -54,7 +55,11 @@ const Portfolio = () => {
     try {
       const res = await axios.get(`${BASE_URL}/portfolio/${githubUsername}`);
       const savedData = res?.data?.portfolio;
-      setUserData(savedData);
+      if (savedData) {
+        setUserData(savedData);
+      } else {
+        setUserData(null);
+      }
       setDataLoaded(true);
     } catch (error) {
       console.error(error);
@@ -81,7 +86,7 @@ const Portfolio = () => {
     fetchGitHubStats();
   }, [githubUsername]);
 
-  if (!userData) {
+  if (!dataLoaded) {
     return (
       <>
         <NavBar />
@@ -89,6 +94,21 @@ const Portfolio = () => {
           <div className="text-center">
             <Loader />
             <p className="mt-4 text-neutral-400">Loading portfolio...</p>
+          </div>
+        </div>
+      </>
+    );
+  }
+
+  if (!userData) {
+    return (
+      <>
+        <NavBar />
+        <div className="min-h-screen w-full bg-neutral-950 text-white font-sans p-4 sm:p-6 lg:p-8 flex items-center justify-center">
+          <div className="text-center">
+            <p className="text-red-400 text-xl font-semibold">
+              Portfolio not found for "{githubUsername}"
+            </p>
           </div>
         </div>
       </>
