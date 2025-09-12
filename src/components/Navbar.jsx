@@ -49,6 +49,26 @@ const NavBar = () => {
       action: "Create Portfolio Button Clicked",
       label: "Navbar Create Portfolio Button CTA",
     });
+
+    if (user) {
+      navigate("/portfolio");
+    } else {
+      navigate("/login");
+    }
+  };
+
+  const handleResumeClick = () => {
+    ReactGA.event({
+      category: "Resume",
+      action: "Resume Button Clicked",
+      label: "Navbar Resume Button CTA",
+    });
+
+    if (user) {
+      navigate("/resume");
+    } else {
+      navigate("/login");
+    }
   };
 
   return (
@@ -97,12 +117,10 @@ const NavBar = () => {
                 <Link to="/">Feed</Link>
               </li>
               <li className="bg-orange-600 text-black font-semibold">
-                <Link to={`/portfolio`} onClick={handleCreatePortfolioClick}>
-                  PORTFOLIO
-                </Link>
+                <div onClick={handleCreatePortfolioClick}>PORTFOLIO</div>
               </li>
               <li className="bg-teal-600 text-white font-semibold">
-                <Link to={`/resume`}>RESUME</Link>
+                <div onClick={handleResumeClick}>RESUME</div>
               </li>
               <li>
                 <a onClick={handleLogout}>Logout</a>
@@ -116,12 +134,9 @@ const NavBar = () => {
           </div>
         </div>
       ) : (
-        <Link
-          to={user ? "/portfolio" : "/login"}
-          onClick={handleCreatePortfolioClick}
-        >
+        <div onClick={handleCreatePortfolioClick}>
           <CreatePortfolioButton text={"Create Your Portfolio"} />
-        </Link>
+        </div>
       )}
     </div>
   );
