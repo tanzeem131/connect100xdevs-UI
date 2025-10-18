@@ -265,7 +265,7 @@ export default function CreatePortfolio() {
                 />
                 <Input
                   label="Contact Email"
-                  name="emailId"
+                  name="email"
                   value={formData?.email}
                   onChange={handleInputChange}
                   placeholder="you@example.com"
