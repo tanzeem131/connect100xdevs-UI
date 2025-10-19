@@ -13,50 +13,6 @@ function PdfReader({ setFormData }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // const handleFileChange = async (event) => {
-  //   const file = event.target.files[0];
-  //   if (!file) return;
-
-  //   setError(null);
-  //   setLoading(true);
-
-  //   try {
-  //     const reader = new FileReader();
-
-  //     reader.onload = async (e) => {
-  //       const typedarray = new Uint8Array(e.target.result);
-
-  //       const pdf = await pdfjsLib.getDocument({ data: typedarray }).promise;
-  //       let fullText = "";
-
-  //       for (let i = 1; i <= pdf.numPages; i++) {
-  //         const page = await pdf.getPage(i);
-  //         const textContent = await page.getTextContent();
-  //         const pageText = textContent.items.map((item) => item.str).join(" ");
-  //         fullText += pageText + "\n";
-  //       }
-
-  //       try {
-  //         const res = await axios.post(BASE_URL + "/resume-parser", {
-  //           resumeText: fullText,
-  //         });
-  //         setFormData(res.data);
-  //       } catch (apiErr) {
-  //         console.error("Backend parsing error:", apiErr);
-  //         setError("Failed to parse resume with AI.");
-  //       } finally {
-  //         setLoading(false);
-  //       }
-  //     };
-
-  //     reader.readAsArrayBuffer(file);
-  //   } catch (err) {
-  //     console.error("Error extracting text from PDF:", err);
-  //     setError("Failed to extract text from the PDF. Please try another file.");
-  //     setLoading(false);
-  //   }
-  // };
-
   const handleFileChange = async (event) => {
     const file = event.target.files[0];
     if (!file) return;
@@ -83,7 +39,14 @@ function PdfReader({ setFormData }) {
           const res = await axios.post(BASE_URL + "/resume-parser", {
             resumeText: fullText,
           });
-          setFormData(res.data);
+          const parsedData = res.data;
+          setFormData((prev) => ({
+            ...prev,
+            ...parsedData,
+            articles: parsedData.articles || [
+              { title: "", owner: "", link: "" },
+            ],
+          }));
         } catch (apiErr) {
           if (apiErr.response?.status === 429) {
             const rateLimitData = apiErr.response.data;

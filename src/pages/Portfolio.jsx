@@ -71,21 +71,6 @@ const Portfolio = () => {
     fetchedPortfolioData();
   }, [githubUsername]);
 
-  useEffect(() => {
-    const fetchGitHubStats = async () => {
-      try {
-        const res = await axios.get(
-          BASE_URL + `/github-stats/${githubUsername}`
-        );
-        setGithubStats(res?.data);
-      } catch (error) {
-        console.error("Error fetching GitHub stats:", error);
-      }
-    };
-
-    fetchGitHubStats();
-  }, [githubUsername]);
-
   if (!dataLoaded) {
     return (
       <>
@@ -216,41 +201,50 @@ const Portfolio = () => {
                     href={`https://github.com/${userData?.socials?.github}`}
                     color="text-neutral-300 group-hover:text-white"
                   />
-                  <SocialLink
-                    icon={FaTwitter}
-                    href={`https://x.com/${userData?.socials?.twitter}`}
-                    color="text-sky-400 group-hover:text-sky-300"
-                  />
+
+                  {userData?.socials?.twitter && (
+                    <SocialLink
+                      icon={FaTwitter}
+                      href={`https://x.com/${userData?.socials?.twitter}`}
+                      color="text-sky-400 group-hover:text-sky-300"
+                    />
+                  )}
                   <SocialLink
                     icon={FaLinkedin}
                     href={`https://linkedin.com/in/${userData?.socials?.linkedin}`}
                     color="text-blue-500 group-hover:text-blue-400"
                   />
-                  <SocialLink
-                    icon={SiLeetcode}
-                    href={`https://leetcode.com/${userData?.socials?.leetcode}`}
-                    color="text-[#FFA116] group-hover:text-[#ffe316]"
-                  />
+                  {userData?.socials?.leetcode && (
+                    <SocialLink
+                      icon={SiLeetcode}
+                      href={`https://leetcode.com/${userData?.socials?.leetcode}`}
+                      color="text-[#FFA116] group-hover:text-[#ffe316]"
+                    />
+                  )}
                 </div>
               </BentoCard>
 
-              <BentoCard
-                padding="p-1"
-                className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
-                variants={itemVariants}
-              >
-                <img
-                  src={`https://leetcard.jacoblin.cool/${userData?.socials?.leetcode}`}
-                  alt="LeetCode Stats"
-                  className="rounded-xl"
-                />
-              </BentoCard>
+              {userData?.socials?.leetcode && (
+                <BentoCard
+                  padding="p-1"
+                  className="group bg-gradient-to-br from-neutral-900 to-neutral-900"
+                  variants={itemVariants}
+                >
+                  <img
+                    src={`https://leetcard.jacoblin.cool/${userData?.socials?.leetcode}`}
+                    alt="LeetCode Stats"
+                    className="rounded-xl"
+                  />
+                </BentoCard>
+              )}
 
               <GitHubStatsCard
-                padding="p-4"
+                padding="p-3"
                 CardComponent={BentoCard}
                 variants={itemVariants}
                 stats={githubStats}
+                username={githubUsername}
+                hasLeetCode={!!userData?.socials?.leetcode}
               />
             </div>
 

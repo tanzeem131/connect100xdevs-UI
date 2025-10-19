@@ -311,11 +311,10 @@ export default function CreatePortfolio() {
                 <Input
                   label="Twitter Handle"
                   name="twitter"
-                  value={formData?.socials?.twitter}
+                  value={formData.socials.twitter}
                   onChange={handleSocialChange}
-                  placeholder="@John_Doe"
+                  placeholder="John_Doe"
                   icon={FaTwitter}
-                  required
                 />
                 <Input
                   label="LinkedIn Profile"
@@ -333,7 +332,6 @@ export default function CreatePortfolio() {
                   onChange={handleSocialChange}
                   placeholder="John-Doe"
                   icon={SiLeetcode}
-                  required
                 />
               </div>
             </FormSection>
