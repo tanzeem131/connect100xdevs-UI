@@ -14,6 +14,7 @@ export const Input = ({
       className="block text-sm font-medium text-neutral-300 mb-1"
     >
       {label}
+      {required && <span className="text-red-500 ml-1">*</span>}
     </label>
     <div className="relative">
       <span className="absolute inset-y-0 left-0 flex items-center pl-3">
