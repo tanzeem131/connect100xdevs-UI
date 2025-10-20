@@ -46,7 +46,6 @@ const Portfolio = () => {
   };
 
   const [userData, setUserData] = useState();
-  const [githubStats, setGithubStats] = useState();
   const [dataLoaded, setDataLoaded] = useState(false);
 
   const { githubUsername } = useParams();
@@ -242,7 +241,6 @@ const Portfolio = () => {
                 padding="p-3"
                 CardComponent={BentoCard}
                 variants={itemVariants}
-                stats={githubStats}
                 username={githubUsername}
                 hasLeetCode={!!userData?.socials?.leetcode}
               />

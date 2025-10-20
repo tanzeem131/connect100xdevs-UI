@@ -54,9 +54,15 @@ export const GitHubStatsCard = ({
       className="md:col-span-1 lg:col-span-2 group bg-gradient-to-br from-neutral-900 to-neutral-900"
       variants={variants}
     >
-      <h2 className="text-sm text-white mb-[1px]">Top Languages</h2>
+      <h2
+        className={`text-sm text-white ${
+          !hasLeetCode ? "mb-[2px]" : "mb-[4px]"
+        }`}
+      >
+        Top Languages
+      </h2>
 
-      <div className={`space-y-2 ${!hasLeetCode ? "py-1 space-y-3" : ""}`}>
+      <div className={`space-y-2 ${!hasLeetCode ? "" : ""}`}>
         {loading ? (
           <div className="flex justify-center items-center mx-auto py-2">
             <Loader />
@@ -73,7 +79,9 @@ export const GitHubStatsCard = ({
             return (
               <div
                 key={lang.name}
-                className={`relative ${!hasLeetCode ? "py-[1px]" : ""}`}
+                className={`relative cursor-pointer ${
+                  !hasLeetCode ? "py-[1px]" : ""
+                }`}
                 onMouseEnter={() => setHoveredIndex(idx)}
                 onMouseLeave={() => setHoveredIndex(null)}
               >
@@ -95,7 +103,7 @@ export const GitHubStatsCard = ({
                 )}
 
                 <div
-                  className={`w-full bg-neutral-800 rounded-full overflow-hidden cursor-pointer ${
+                  className={`w-full bg-neutral-800 rounded-full overflow-hidden ${
                     !hasLeetCode ? "h-[2px]" : "h-[2px]"
                   }`}
                 >
