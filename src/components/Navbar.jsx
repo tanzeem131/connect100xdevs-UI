@@ -108,7 +108,7 @@ const NavBar = () => {
                 <Link to="/profile">Profile</Link>
               </li>
               <li>
-                <Link to="/chat">Chat</Link>
+                <Link to="/chat">Chat 🗪</Link>
               </li>
               <li>
                 <Link to="/connections">Connections</Link>

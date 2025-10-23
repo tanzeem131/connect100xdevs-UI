@@ -45,7 +45,7 @@ const ChatList = () => {
 
   if (chats.length === 0) {
     return (
-      <div className="mt-5 min-h-screen">
+      <div className="my-5 min-h-screen">
         <TextInputHeading text={"Messages"} />
         <TextInputError
           text={"No conversations yet. Start chatting with your connections!"}
@@ -55,7 +55,7 @@ const ChatList = () => {
   }
 
   return (
-    <div className="mt-5 min-h-screen">
+    <div className="my-5 min-h-screen">
       <TextInputHeading text={"Messages"} />
 
       {chats.map((chat) => {
@@ -67,7 +67,7 @@ const ChatList = () => {
           <div
             key={chat._id}
             onClick={() => handleChatClick(otherUser._id)}
-            className="bg-gray-800 rounded-lg p-6 mb-4 cursor-pointer hover:bg-gray-750 transition-colors border border-gray-700"
+            className="bg-gray-800 rounded-lg p-6 my-4 cursor-pointer hover:bg-gray-750 transition-colors border border-gray-700"
           >
             <div className="flex items-start gap-4">
               <div className="relative">
